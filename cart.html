@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السلة - Farabi Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#93C572',
+                            light: '#B4D99A',
+                            dark: '#7BA85A',
+                        },
+                        secondary: {
+                            DEFAULT: '#0f172a',
+                            light: '#1e293b',
+                            dark: '#020617',
+                        },
+                    },
+                    fontFamily: {
+                        arabic: ['Cairo', 'Tajawal', 'Arial', 'sans-serif'],
+                        english: ['Inter', 'Roboto', 'Arial', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="./dist/output.css">
+    <link rel="stylesheet" href="./src/enhancements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Roboto', Arial, sans-serif;
+        }
+        [dir="rtl"] body {
+            font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+            <div class="flex justify-between items-center h-14 sm:h-16">
+                <div class="flex items-center space-x-2 sm:space-x-4 rtl:space-x-reverse">
+                    <button id="sidebarToggle" class="lg:hidden text-gray-700 hover:text-primary transition-colors p-2">
+                        <i class="fas fa-bars text-lg sm:text-xl"></i>
+                    </button>
+                    <a href="index.html" class="flex items-center space-x-1 sm:space-x-2 rtl:space-x-reverse">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary to-primary-dark rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-sm sm:text-lg"></i>
+                        </div>
+                        <span class="text-base sm:text-xl font-bold text-secondary hidden sm:inline">Farabi Academy</span>
+                    </a>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-1 rtl:space-x-reverse">
+                    <a href="index.html" class="nav-link" data-i18n="nav.home">الرئيسية</a>
+                    <a href="courses.html" class="nav-link" data-i18n="nav.courses">الدورات</a>
+                    <a href="#" class="nav-link" data-i18n="nav.instructors">المدربون</a>
+                    <a href="dashboard.html" class="nav-link" data-i18n="sidebar.dashboard">لوحة التحكم</a>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-4 rtl:space-x-reverse">
+                    <a href="cart.html" class="relative text-primary p-2">
+                        <i class="fas fa-shopping-cart text-base sm:text-xl"></i>
+                        <span id="cartCount" class="absolute -top-1 -right-1 rtl:right-auto rtl:-left-1 bg-primary text-white text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center font-bold text-[10px] sm:text-xs">0</span>
+                    </a>
+                    <button id="languageToggle" class="flex items-center space-x-1 sm:space-x-2 rtl:space-x-reverse px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-globe text-primary text-sm sm:text-base"></i>
+                        <span class="font-medium text-xs sm:text-sm hidden sm:inline" id="currentLang">العربية</span>
+                    </button>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center text-white font-semibold text-xs sm:text-sm">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 rtl:left-auto rtl:right-0 z-40 w-64 bg-white shadow-lg transform -translate-x-full rtl:translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] mt-14 sm:mt-16 lg:mt-0">
+            <div class="h-full overflow-y-auto py-6">
+                <div class="px-6 mb-6">
+                    <h2 class="text-lg font-bold text-secondary" data-i18n="sidebar.menu">القائمة</h2>
+                </div>
+
+                <nav class="space-y-2 px-4">
+                    <a href="dashboard.html" class="sidebar-link">
+                        <i class="fas fa-home ml-3 rtl:ml-0 rtl:mr-3"></i>
+                        <span data-i18n="sidebar.dashboard">لوحة التحكم</span>
+                    </a>
+                    <a href="my-courses.html" class="sidebar-link">
+                        <i class="fas fa-book ml-3 rtl:ml-0 rtl:mr-3"></i>
+                        <span data-i18n="sidebar.myCourses">دوراتي</span>
+                    </a>
+                    <a href="courses.html" class="sidebar-link">
+                        <i class="fas fa-store ml-3 rtl:ml-0 rtl:mr-3"></i>
+                        <span data-i18n="nav.courses">الدورات</span>
+                    </a>
+                    <a href="cart.html" class="sidebar-link active">
+                        <i class="fas fa-shopping-cart ml-3 rtl:ml-0 rtl:mr-3"></i>
+                        <span data-i18n="cart.title">السلة</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden"></div>
+
+        <!-- Main Content -->
+        <main class="flex-1 lg:mr-64 rtl:lg:mr-0 rtl:lg:ml-64">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Page Header -->
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-secondary mb-2" data-i18n="cart.title">سلة التسوق</h1>
+                    <p class="text-gray-600" data-i18n="cart.subtitle">راجع الكورسات المختارة قبل الدفع</p>
+                </div>
+
+                <!-- Cart Content -->
+                <div id="cartContent">
+                    <!-- Empty Cart Message -->
+                    <div id="emptyCart" class="bg-white rounded-xl shadow-md p-12 text-center hidden">
+                        <i class="fas fa-shopping-cart text-gray-300 text-6xl mb-4"></i>
+                        <h2 class="text-2xl font-bold text-gray-700 mb-2" data-i18n="cart.empty">السلة فارغة</h2>
+                        <p class="text-gray-500 mb-6" data-i18n="cart.emptyDesc">لم تقم بإضافة أي كورسات إلى السلة بعد</p>
+                        <a href="courses.html" class="inline-block px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium" data-i18n="cart.browseCourses">تصفح الكورسات</a>
+                    </div>
+
+                    <!-- Cart Items -->
+                    <div id="cartItems" class="space-y-4"></div>
+                </div>
+
+                <!-- Cart Summary -->
+                <div id="cartSummary" class="mt-8 bg-white rounded-xl shadow-md p-6 hidden">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2" data-i18n="cart.total">الإجمالي</h3>
+                            <p class="text-3xl font-bold text-secondary" id="cartTotal">$0.00</p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                            <a href="courses.html" class="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium text-center" data-i18n="cart.continueShopping">متابعة التسوق</a>
+                            <a href="checkout.html" class="btn-gradient-primary px-6 py-3 text-white rounded-lg font-medium text-center relative z-10" data-i18n="cart.checkout">الدفع</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 rtl:space-x-reverse mb-4">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold">Farabi Academy</span>
+                    </div>
+                    <p class="text-gray-300 mb-4" data-i18n="footer.description">منصة تعليمية رائدة تقدم دورات عالية الجودة في مختلف المجالات. انضم إلى آلاف الطلاب الذين يطورون مهاراتهم معنا.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg mb-4" data-i18n="footer.quickLinks">روابط سريعة</h3>
+                    <ul class="space-y-2">
+                        <li><a href="courses.html" class="text-gray-300 hover:text-primary transition-colors" data-i18n="footer.courses">الدورات</a></li>
+                        <li><a href="cart.html" class="text-gray-300 hover:text-primary transition-colors" data-i18n="cart.title">السلة</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg mb-4" data-i18n="footer.support">الدعم</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors" data-i18n="footer.help">مركز المساعدة</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors" data-i18n="footer.contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/20 mt-8 pt-8 text-center text-gray-300">
+                <p data-i18n="footer.copyright">© 2024 Farabi Academy. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./src/main.js"></script>
+    <script src="./src/cart.js"></script>
+    <script>
+        // Load and display cart items
+        function loadCartItems() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItems = document.getElementById('cartItems');
+            const emptyCart = document.getElementById('emptyCart');
+            const cartSummary = document.getElementById('cartSummary');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                emptyCart.classList.remove('hidden');
+                cartItems.innerHTML = '';
+                cartSummary.classList.add('hidden');
+                return;
+            }
+            
+            emptyCart.classList.add('hidden');
+            cartSummary.classList.remove('hidden');
+            
+            let total = 0;
+            cartItems.innerHTML = '';
+            
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'bg-white rounded-xl shadow-md p-6';
+                cartItem.innerHTML = `
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="w-full md:w-48 h-32 bg-gray-200 rounded-lg flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=250&fit=crop" alt="${item.name}" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-1">${item.name}</h3>
+                                    <p class="text-gray-600 text-sm" data-i18n="cart.course">كورس تعليمي</p>
+                                </div>
+                                <button onclick="removeFromCart('${item.id}')" class="text-red-500 hover:text-red-700 transition-colors">
+                                    <i class="fas fa-trash text-xl"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between mt-4">
+                                <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                                    <span class="text-2xl font-bold text-secondary">$${item.price.toFixed(2)}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                cartItems.appendChild(cartItem);
+            });
+            
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+        }
+        
+        // Load cart on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCartItems();
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
+

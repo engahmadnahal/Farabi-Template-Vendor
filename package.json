@@ -1,0 +1,13 @@
+{
+  "name": "farabi-academy",
+  "version": "1.0.0",
+  "description": "Farabi Academy - Premium Educational Platform",
+  "scripts": {
+    "build-css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
+

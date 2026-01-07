@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Custom Styles */
+@layer base {
+  body {
+    @apply font-english;
+  }
+  
+  [dir="rtl"] body {
+    @apply font-arabic;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply px-4 py-2 rounded-lg transition-all duration-300 hover:bg-primary/10 hover:text-primary;
+  }
+  
+  .nav-link.active {
+    @apply bg-primary text-white;
+  }
+  
+  .sidebar-link {
+    @apply block px-4 py-3 rounded-lg transition-all duration-300 hover:bg-primary/10 hover:text-primary;
+  }
+  
+  .sidebar-link.active {
+    @apply bg-primary text-white font-semibold;
+  }
+}
+
