@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace - Farabi Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="40" height="40" rx="10" fill="url(#farabiGradient)"/>
+                        <defs>
+                            <linearGradient id="farabiGradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#A8D5BA"/>
+                                <stop offset="1" stop-color="#1E3A5F"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M20 12L26 18L20 24M14 18H26" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="20" cy="20" r="18" stroke="white" stroke-width="1.5" stroke-opacity="0.3"/>
+                    </svg>
+                    <span class="logo-text">Farabi Academy</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="student-dashboard.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M2.5 10L9.16667 3.33333L9.16667 8.33333L17.5 8.33333L17.5 11.6667L9.16667 11.6667L9.16667 16.6667L2.5 10Z" fill="currentColor"/>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="my-courses.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M2.5 5.83333L10 2.5L17.5 5.83333V15L10 17.5L2.5 15V5.83333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 2.5V17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2.5 5.83333L10 9.16667L17.5 5.83333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>My Courses</span>
+                </a>
+                <a href="marketplace.html" class="nav-item active">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M2.5 2.5H17.5V17.5H2.5V2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7.5 7.5H12.5M7.5 12.5H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span>Marketplace</span>
+                </a>
+                <a href="cart.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M5 5H15L14.1667 13.3333H5.83333L5 5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5 5L3.33333 2.5H1.66667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="7.5" cy="17.5" r="1.25" fill="currentColor"/>
+                        <circle cx="13.75" cy="17.5" r="1.25" fill="currentColor"/>
+                    </svg>
+                    <span>Cart</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=A8D5BA&color=1E3A5F" alt="User">
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">Sarah Johnson</div>
+                        <div class="user-role">Student</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <h1 class="page-title">Marketplace</h1>
+                    <p class="page-subtitle">Discover new courses to enhance your skills</p>
+                </div>
+                <div class="topbar-right">
+                    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+                        <svg class="sun-icon" width="14" height="14" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="moon-icon" width="14" height="14" viewBox="0 0 24 24" fill="none">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="language-switcher">
+                        <button class="active" onclick="switchLanguage('en')">EN</button>
+                        <span class="divider"></span>
+                        <button onclick="switchLanguage('ar')">AR</button>
+                    </div>
+                    <a href="cart.html" class="icon-button cart-icon">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5 5H15L14.1667 13.3333H5.83333L5 5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M5 5L3.33333 2.5H1.66667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="7.5" cy="17.5" r="1.25" fill="currentColor"/>
+                            <circle cx="13.75" cy="17.5" r="1.25" fill="currentColor"/>
+                        </svg>
+                        <span class="cart-badge">2</span>
+                    </a>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Filters -->
+                <div class="card" style="margin-bottom: var(--spacing-xl);">
+                    <div class="card-body">
+                        <div style="display: flex; gap: var(--spacing-lg); flex-wrap: wrap; align-items: center;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <input type="text" placeholder="Search courses..." class="select-input" style="width: 100%;">
+                            </div>
+                            <select class="select-input">
+                                <option>All Categories</option>
+                                <option>Programming</option>
+                                <option>Design</option>
+                                <option>Data Science</option>
+                                <option>Business</option>
+                            </select>
+                            <select class="select-input">
+                                <option>All Levels</option>
+                                <option>Beginner</option>
+                                <option>Intermediate</option>
+                                <option>Advanced</option>
+                            </select>
+                            <select class="select-input">
+                                <option>Sort by: Popular</option>
+                                <option>Sort by: Price Low to High</option>
+                                <option>Sort by: Price High to Low</option>
+                                <option>Sort by: Newest</option>
+                                <option>Sort by: Rating</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Courses Grid -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--spacing-xl);">
+                    <!-- Course Card 1 -->
+                    <div class="card course-card">
+                        <div class="course-thumbnail" style="height: 200px; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; position: relative; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=250&fit=crop" alt="Course" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div style="position: absolute; top: var(--spacing-md); left: var(--spacing-md);">
+                                <span class="badge badge-success">Bestseller</span>
+                            </div>
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); padding: var(--spacing-md); color: white;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; font-size: var(--font-size-sm);">
+                                    <span>24 lessons</span>
+                                    <span>8 hours</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 style="font-size: var(--font-size-lg); font-weight: 600; color: var(--text-primary); margin-bottom: var(--spacing-sm);">Advanced JavaScript Mastery</h3>
+                            <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-bottom: var(--spacing-md);">Master advanced JavaScript concepts and modern development practices</p>
+                            
+                            <div style="display: flex; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                                <div class="rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="rating-value">4.9</span>
+                                    <span style="font-size: var(--font-size-xs); color: var(--text-secondary);">(342)</span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg);">
+                                <div>
+                                    <span style="font-size: var(--font-size-2xl); font-weight: 700; color: var(--secondary);">$99</span>
+                                    <span style="font-size: var(--font-size-sm); color: var(--text-secondary); text-decoration: line-through; margin-left: var(--spacing-sm);">$149</span>
+                                </div>
+                                <button class="btn-secondary" style="background: var(--primary); color: white; border: none;" onclick="addToCart('Advanced JavaScript Mastery', 99)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Card 2 -->
+                    <div class="card course-card">
+                        <div class="course-thumbnail" style="height: 200px; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; position: relative; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=250&fit=crop" alt="Course" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div style="position: absolute; top: var(--spacing-md); left: var(--spacing-md);">
+                                <span class="badge badge-success">New</span>
+                            </div>
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); padding: var(--spacing-md); color: white;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; font-size: var(--font-size-sm);">
+                                    <span>18 lessons</span>
+                                    <span>6 hours</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 style="font-size: var(--font-size-lg); font-weight: 600; color: var(--text-primary); margin-bottom: var(--spacing-sm);">React Masterclass</h3>
+                            <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-bottom: var(--spacing-md);">Build modern web applications with React</p>
+                            
+                            <div style="display: flex; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                                <div class="rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="rating-value">4.8</span>
+                                    <span style="font-size: var(--font-size-xs); color: var(--text-secondary);">(298)</span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg);">
+                                <div>
+                                    <span style="font-size: var(--font-size-2xl); font-weight: 700; color: var(--secondary);">$79</span>
+                                </div>
+                                <button class="btn-secondary" style="background: var(--primary); color: white; border: none;" onclick="addToCart('React Masterclass', 79)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Card 3 -->
+                    <div class="card course-card">
+                        <div class="course-thumbnail" style="height: 200px; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; position: relative; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=250&fit=crop" alt="Course" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); padding: var(--spacing-md); color: white;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; font-size: var(--font-size-sm);">
+                                    <span>32 lessons</span>
+                                    <span>12 hours</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 style="font-size: var(--font-size-lg); font-weight: 600; color: var(--text-primary); margin-bottom: var(--spacing-sm);">UI/UX Design Fundamentals</h3>
+                            <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-bottom: var(--spacing-md);">Learn the principles of user interface and experience design</p>
+                            
+                            <div style="display: flex; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                                <div class="rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span class="rating-value">4.7</span>
+                                    <span style="font-size: var(--font-size-xs); color: var(--text-secondary);">(267)</span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg);">
+                                <div>
+                                    <span style="font-size: var(--font-size-2xl); font-weight: 700; color: var(--secondary);">$89</span>
+                                </div>
+                                <button class="btn-secondary" style="background: var(--primary); color: white; border: none;" onclick="addToCart('UI/UX Design Fundamentals', 89)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Card 4 -->
+                    <div class="card course-card">
+                        <div class="course-thumbnail" style="height: 200px; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; position: relative; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=250&fit=crop" alt="Course" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); padding: var(--spacing-md); color: white;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; font-size: var(--font-size-sm);">
+                                    <span>28 lessons</span>
+                                    <span>10 hours</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 style="font-size: var(--font-size-lg); font-weight: 600; color: var(--text-primary); margin-bottom: var(--spacing-sm);">Python for Data Science</h3>
+                            <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-bottom: var(--spacing-md);">Data analysis and machine learning with Python</p>
+                            
+                            <div style="display: flex; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                                <div class="rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="rating-value">4.9</span>
+                                    <span style="font-size: var(--font-size-xs); color: var(--text-secondary);">(189)</span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg);">
+                                <div>
+                                    <span style="font-size: var(--font-size-2xl); font-weight: 700; color: var(--secondary);">$109</span>
+                                </div>
+                                <button class="btn-secondary" style="background: var(--primary); color: white; border: none;" onclick="addToCart('Python for Data Science', 109)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Card 5 -->
+                    <div class="card course-card">
+                        <div class="course-thumbnail" style="height: 200px; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; position: relative; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop" alt="Course" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); padding: var(--spacing-md); color: white;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; font-size: var(--font-size-sm);">
+                                    <span>22 lessons</span>
+                                    <span>9 hours</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 style="font-size: var(--font-size-lg); font-weight: 600; color: var(--text-primary); margin-bottom: var(--spacing-sm);">Node.js Backend Development</h3>
+                            <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-bottom: var(--spacing-md);">Build scalable backend applications with Node.js</p>
+                            
+                            <div style="display: flex; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                                <div class="rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span class="rating-value">4.6</span>
+                                    <span style="font-size: var(--font-size-xs); color: var(--text-secondary);">(156)</span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg);">
+                                <div>
+                                    <span style="font-size: var(--font-size-2xl); font-weight: 700; color: var(--secondary);">$94</span>
+                                </div>
+                                <button class="btn-secondary" style="background: var(--primary); color: white; border: none;" onclick="addToCart('Node.js Backend Development', 94)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Card 6 -->
+                    <div class="card course-card">
+                        <div class="course-thumbnail" style="height: 200px; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; position: relative; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop" alt="Course" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); padding: var(--spacing-md); color: white;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; font-size: var(--font-size-sm);">
+                                    <span>35 lessons</span>
+                                    <span>14 hours</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 style="font-size: var(--font-size-lg); font-weight: 600; color: var(--text-primary); margin-bottom: var(--spacing-sm);">Full Stack Web Development</h3>
+                            <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-bottom: var(--spacing-md);">Complete guide to building full-stack applications</p>
+                            
+                            <div style="display: flex; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                                <div class="rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="rating-value">4.8</span>
+                                    <span style="font-size: var(--font-size-xs); color: var(--text-secondary);">(223)</span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg);">
+                                <div>
+                                    <span style="font-size: var(--font-size-2xl); font-weight: 700; color: var(--secondary);">$149</span>
+                                    <span style="font-size: var(--font-size-sm); color: var(--text-secondary); text-decoration: line-through; margin-left: var(--spacing-sm);">$199</span>
+                                </div>
+                                <button class="btn-secondary" style="background: var(--primary); color: white; border: none;" onclick="addToCart('Full Stack Web Development', 149)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="sidebar-overlay"></div>
+    <script src="script.js"></script>
+    <script src="language-switcher.js"></script>
+    <script src="dark-mode.js"></script>
+    <script>
+        function addToCart(courseName, price) {
+            // Store in localStorage
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart.push({ name: courseName, price: price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update cart badge
+            const badge = document.querySelector('.cart-badge');
+            if (badge) {
+                badge.textContent = cart.length;
+            }
+            
+            // Show notification
+            alert(`${courseName} added to cart!`);
+        }
+    </script>
+</body>
+</html>
+

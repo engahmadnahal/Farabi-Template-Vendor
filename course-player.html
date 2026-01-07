@@ -1,465 +1,307 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مشغل الكورس - Farabi Academy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            DEFAULT: '#93C572',
-                            light: '#B4D99A',
-                            dark: '#7BA85A',
-                        },
-                        secondary: {
-                            DEFAULT: '#0f172a',
-                            light: '#1e293b',
-                            dark: '#020617',
-                        },
-                    },
-                    fontFamily: {
-                        arabic: ['Cairo', 'Tajawal', 'Arial', 'sans-serif'],
-                        english: ['Inter', 'Roboto', 'Arial', 'sans-serif'],
-                    },
-                },
-            },
-        }
-    </script>
-    <link rel="stylesheet" href="./dist/output.css">
-    <link rel="stylesheet" href="./src/enhancements.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Advanced JavaScript Mastery - Farabi Academy</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', 'Roboto', Arial, sans-serif;
-        }
-        [dir="rtl"] body {
-            font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
-        }
-        
-        /* Video Player Styles */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            background: #000;
-        }
-        
-        .video-container iframe,
-        .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* Chapter Styles */
-        .chapter-item {
-            transition: all 0.2s;
-        }
-        
-        .chapter-item:hover {
-            background-color: rgba(147, 197, 114, 0.05);
-        }
-        
-        .lesson-item {
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        
-        .lesson-item:hover {
-            background-color: rgba(147, 197, 114, 0.1);
-        }
-        
-        .lesson-item.active {
-            background-color: rgba(147, 197, 114, 0.15);
-            border-right: 3px solid #93C572;
-        }
-        
-        .lesson-item.completed .lesson-check {
-            color: #93C572;
-        }
-        
-        /* Progress Bar */
-        .progress-bar {
-            transition: width 0.3s ease;
-        }
-        
-        /* Distraction-free mode */
-        .distraction-free {
-            transition: all 0.3s ease;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-900 text-white">
-    <!-- Top Progress Bar -->
-    <div class="bg-gray-800 border-b border-gray-700">
-        <div class="max-w-full mx-auto px-4 py-2">
-            <div class="flex items-center justify-between mb-2">
-                <div class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <a href="my-courses.html" class="text-gray-400 hover:text-white transition-colors">
-                        <i class="fas fa-arrow-right rtl:rotate-180"></i>
-                    </a>
-                    <span class="text-sm text-gray-400" data-i18n="player.courseProgress">تقدم الكورس</span>
-                    <span class="text-sm font-semibold text-primary" id="courseProgress">68%</span>
-                </div>
-                <button id="fullscreenToggle" class="text-gray-400 hover:text-white transition-colors">
-                    <i class="fas fa-expand"></i>
+<body>
+    <div class="course-player-container">
+        <!-- Main Content -->
+        <main class="course-player-main">
+            <!-- Top Bar -->
+            <header class="course-player-topbar">
+                <button onclick="goBack()" class="back-btn" style="display: flex; align-items: center; gap: var(--spacing-sm); background: none; border: none; color: var(--text-primary); cursor: pointer; font-size: var(--font-size-base); padding: var(--spacing-sm); border-radius: var(--border-radius-sm); transition: var(--transition);">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Back</span>
                 </button>
-            </div>
-            <div class="w-full bg-gray-700 rounded-full h-1.5">
-                <div class="bg-gradient-to-r from-primary to-primary-dark h-1.5 rounded-full progress-bar" id="progressBar" style="width: 68%"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="flex h-[calc(100vh-73px)]">
-        <!-- Sidebar - Chapters & Lessons (Desktop) -->
-        <aside id="sidebar" class="hidden lg:block w-80 bg-gray-800 border-l border-gray-700 rtl:border-l-0 rtl:border-r overflow-y-auto">
-            <div class="p-4">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-lg font-bold text-white" data-i18n="player.courseContent">محتوى الكورس</h2>
+                <div style="flex: 1;">
+                    <h1 class="page-title" style="font-size: var(--font-size-xl); margin-bottom: 4px;">Advanced JavaScript Mastery</h1>
+                    <p class="page-subtitle" style="font-size: var(--font-size-sm);">Lesson 5: Advanced Functions and Closures</p>
                 </div>
-
-                <!-- Chapters List -->
-                <div class="space-y-2" id="chaptersList">
-                    <!-- Chapter 1 -->
-                    <div class="chapter-item">
-                        <div class="flex items-center justify-between p-3 rounded-lg cursor-pointer" onclick="toggleChapter(1)">
-                            <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                <i class="fas fa-chevron-down text-xs text-gray-400" id="chapterIcon1"></i>
-                                <span class="font-semibold text-white">الفصل الأول: مقدمة في HTML</span>
-                            </div>
-                            <span class="text-xs text-gray-400">3/5</span>
-                        </div>
-                        <div id="chapterContent1" class="mt-1 space-y-1 pr-6 rtl:pr-0 rtl:pl-6">
-                            <div class="lesson-item active completed p-2 rounded" onclick="loadLesson(1, 1)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="fas fa-check-circle lesson-check text-sm"></i>
-                                    <span class="text-sm text-gray-300">مقدمة الكورس</span>
-                                </div>
-                                <span class="text-xs text-gray-500">5:30</span>
-                            </div>
-                            <div class="lesson-item completed p-2 rounded" onclick="loadLesson(1, 2)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="fas fa-check-circle lesson-check text-sm"></i>
-                                    <span class="text-sm text-gray-300">ما هو HTML؟</span>
-                                </div>
-                                <span class="text-xs text-gray-500">8:15</span>
-                            </div>
-                            <div class="lesson-item active completed p-2 rounded" onclick="loadLesson(1, 3)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="fas fa-check-circle lesson-check text-sm"></i>
-                                    <span class="text-sm text-gray-300">هيكل HTML الأساسي</span>
-                                </div>
-                                <span class="text-xs text-gray-500">12:45</span>
-                            </div>
-                            <div class="lesson-item p-2 rounded" onclick="loadLesson(1, 4)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="far fa-circle lesson-check text-sm text-gray-500"></i>
-                                    <span class="text-sm text-gray-400">العناصر والوسوم</span>
-                                </div>
-                                <span class="text-xs text-gray-500">15:20</span>
-                            </div>
-                            <div class="lesson-item p-2 rounded" onclick="loadLesson(1, 5)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="far fa-circle lesson-check text-sm text-gray-500"></i>
-                                    <span class="text-sm text-gray-400">التمارين العملية</span>
-                                </div>
-                                <span class="text-xs text-gray-500">20:00</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Chapter 2 -->
-                    <div class="chapter-item">
-                        <div class="flex items-center justify-between p-3 rounded-lg cursor-pointer" onclick="toggleChapter(2)">
-                            <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                <i class="fas fa-chevron-right rtl:rotate-180 text-xs text-gray-400" id="chapterIcon2"></i>
-                                <span class="font-semibold text-white">الفصل الثاني: CSS الأساسي</span>
-                            </div>
-                            <span class="text-xs text-gray-400">0/4</span>
-                        </div>
-                        <div id="chapterContent2" class="mt-1 space-y-1 pr-6 rtl:pr-0 rtl:pl-6 hidden">
-                            <div class="lesson-item p-2 rounded" onclick="loadLesson(2, 1)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="far fa-circle lesson-check text-sm text-gray-500"></i>
-                                    <span class="text-sm text-gray-400">مقدمة CSS</span>
-                                </div>
-                                <span class="text-xs text-gray-500">6:10</span>
-                            </div>
-                            <div class="lesson-item p-2 rounded" onclick="loadLesson(2, 2)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="far fa-circle lesson-check text-sm text-gray-500"></i>
-                                    <span class="text-sm text-gray-400">الأنماط والألوان</span>
-                                </div>
-                                <span class="text-xs text-gray-500">10:30</span>
-                            </div>
-                            <div class="lesson-item p-2 rounded" onclick="loadLesson(2, 3)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="far fa-circle lesson-check text-sm text-gray-500"></i>
-                                    <span class="text-sm text-gray-400">Flexbox و Grid</span>
-                                </div>
-                                <span class="text-xs text-gray-500">18:45</span>
-                            </div>
-                            <div class="lesson-item p-2 rounded" onclick="loadLesson(2, 4)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="far fa-circle lesson-check text-sm text-gray-500"></i>
-                                    <span class="text-sm text-gray-400">مشروع عملي</span>
-                                </div>
-                                <span class="text-xs text-gray-500">25:00</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Chapter 3 -->
-                    <div class="chapter-item">
-                        <div class="flex items-center justify-between p-3 rounded-lg cursor-pointer" onclick="toggleChapter(3)">
-                            <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                <i class="fas fa-chevron-right rtl:rotate-180 text-xs text-gray-400" id="chapterIcon3"></i>
-                                <span class="font-semibold text-white">الفصل الثالث: JavaScript</span>
-                            </div>
-                            <span class="text-xs text-gray-400">0/6</span>
-                        </div>
-                        <div id="chapterContent3" class="mt-1 space-y-1 pr-6 rtl:pr-0 rtl:pl-6 hidden">
-                            <div class="lesson-item p-2 rounded" onclick="loadLesson(3, 1)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="far fa-circle lesson-check text-sm text-gray-500"></i>
-                                    <span class="text-sm text-gray-400">مقدمة JavaScript</span>
-                                </div>
-                                <span class="text-xs text-gray-500">7:20</span>
-                            </div>
-                            <div class="lesson-item p-2 rounded" onclick="loadLesson(3, 2)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="far fa-circle lesson-check text-sm text-gray-500"></i>
-                                    <span class="text-sm text-gray-400">المتغيرات والدوال</span>
-                                </div>
-                                <span class="text-xs text-gray-500">12:15</span>
-                            </div>
-                            <div class="lesson-item p-2 rounded" onclick="loadLesson(3, 3)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="far fa-circle lesson-check text-sm text-gray-500"></i>
-                                    <span class="text-sm text-gray-400">DOM Manipulation</span>
-                                </div>
-                                <span class="text-xs text-gray-500">15:30</span>
-                            </div>
-                            <div class="lesson-item p-2 rounded" onclick="loadLesson(3, 4)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="far fa-circle lesson-check text-sm text-gray-500"></i>
-                                    <span class="text-sm text-gray-400">Events و Async</span>
-                                </div>
-                                <span class="text-xs text-gray-500">20:45</span>
-                            </div>
-                            <div class="lesson-item p-2 rounded" onclick="loadLesson(3, 5)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="far fa-circle lesson-check text-sm text-gray-500"></i>
-                                    <span class="text-sm text-gray-400">APIs و Fetch</span>
-                                </div>
-                                <span class="text-xs text-gray-500">18:20</span>
-                            </div>
-                            <div class="lesson-item p-2 rounded" onclick="loadLesson(3, 6)">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <i class="far fa-circle lesson-check text-sm text-gray-500"></i>
-                                    <span class="text-sm text-gray-400">مشروع نهائي</span>
-                                </div>
-                                <span class="text-xs text-gray-500">30:00</span>
-                            </div>
-                        </div>
-                    </div>
+                <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="14" height="14" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="moon-icon" width="14" height="14" viewBox="0 0 24 24" fill="none">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <div class="language-switcher">
+                    <button class="active" onclick="switchLanguage('en')">EN</button>
+                    <span class="divider"></span>
+                    <button onclick="switchLanguage('ar')">AR</button>
                 </div>
-            </div>
-        </aside>
+            </header>
 
-        <!-- Mobile Drawer -->
-        <div id="mobileDrawer" class="mobile-drawer lg:hidden" style="display: none;">
-            <div class="mobile-drawer-content">
-                <div class="p-4 bg-gray-800 h-full overflow-y-auto">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-lg font-bold text-white" data-i18n="player.courseContent">محتوى الكورس</h2>
-                        <button onclick="toggleSidebar()" class="text-gray-400 hover:text-white">
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    </div>
-                    <div class="space-y-2" id="mobileChaptersList">
-                        <!-- Chapters will be copied here for mobile -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Sidebar Toggle -->
-        <button id="mobileSidebarToggle" onclick="toggleSidebar()" class="lg:hidden fixed top-20 left-4 rtl:left-auto rtl:right-4 z-40 bg-gray-800 text-white p-3 rounded-lg shadow-lg hover:bg-gray-700 transition-colors">
-            <i class="fas fa-list text-lg"></i>
-        </button>
-
-        <!-- Main Content Area -->
-        <main class="flex-1 overflow-y-auto bg-gray-900">
-            <div class="max-w-5xl mx-auto px-4 py-6">
-                <!-- Video Player -->
-                <div class="mb-6">
-                    <div class="video-container rounded-lg overflow-hidden shadow-2xl">
-                        <video id="videoPlayer" controls class="w-full">
-                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-                            <p data-i18n="player.videoNotSupported">متصفحك لا يدعم تشغيل الفيديو.</p>
-                        </video>
-                    </div>
-                </div>
-
-                <!-- Video Info -->
-                <div class="mb-6">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="flex-1">
-                            <h1 class="text-2xl font-bold text-white mb-2" id="videoTitle">هيكل HTML الأساسي</h1>
-                            <p class="text-gray-400 text-sm" id="videoMeta">الفصل الأول • الدرس 3 • 12:45</p>
-                        </div>
-                        <div class="flex items-center space-x-3 rtl:space-x-reverse">
-                            <button class="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors" onclick="markAsComplete()">
-                                <i class="fas fa-check text-primary"></i>
-                            </button>
-                            <button class="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
-                                <i class="fas fa-bookmark text-gray-400"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <p class="text-gray-300 leading-relaxed" id="videoDescription">
-                        في هذا الدرس، سنتعلم الهيكل الأساسي لصفحة HTML. سنتعرف على العناصر الأساسية مثل html، head، و body، وكيفية تنظيم المحتوى بشكل صحيح.
-                    </p>
-                </div>
-
-                <!-- Navigation Buttons -->
-                <div class="flex items-center justify-between mb-8 p-4 bg-gray-800 rounded-lg">
-                    <button id="prevLesson" class="flex items-center space-x-2 rtl:space-x-reverse px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors" onclick="previousLesson()">
-                        <i class="fas fa-chevron-right rtl:rotate-180"></i>
-                        <span data-i18n="player.previous">السابق</span>
-                    </button>
-                    <button id="nextLesson" class="btn-gradient-primary flex items-center space-x-2 rtl:space-x-reverse px-4 py-2 rounded-lg relative z-10" onclick="nextLesson()">
-                        <span class="relative z-10" data-i18n="player.next">التالي</span>
-                        <i class="fas fa-chevron-left rtl:rotate-180 relative z-10"></i>
-                    </button>
-                </div>
-
-                <!-- Video Rating -->
-                <div class="bg-gray-800 rounded-lg p-6 mb-6">
-                    <h3 class="text-lg font-semibold text-white mb-4" data-i18n="player.rateThisLesson">قيم هذا الدرس</h3>
-                    <div class="flex items-center space-x-2 rtl:space-x-reverse mb-4">
-                        <div class="flex text-yellow-400" id="lessonRating">
-                            <i class="far fa-star cursor-pointer text-2xl hover:text-yellow-300 transition-colors" data-rating="1"></i>
-                            <i class="far fa-star cursor-pointer text-2xl hover:text-yellow-300 transition-colors" data-rating="2"></i>
-                            <i class="far fa-star cursor-pointer text-2xl hover:text-yellow-300 transition-colors" data-rating="3"></i>
-                            <i class="far fa-star cursor-pointer text-2xl hover:text-yellow-300 transition-colors" data-rating="4"></i>
-                            <i class="far fa-star cursor-pointer text-2xl hover:text-yellow-300 transition-colors" data-rating="5"></i>
-                        </div>
-                        <span class="text-gray-400 text-sm" id="ratingText" data-i18n="player.clickToRate">اضغط لتقييم</span>
-                    </div>
-                </div>
-
-                <!-- Course Overall Rating -->
-                <div class="bg-gray-800 rounded-lg p-6 mb-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-white" data-i18n="player.courseRating">تقييم الكورس</h3>
-                        <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                            <div class="flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="text-white font-semibold">4.8</span>
-                            <span class="text-gray-400 text-sm">(1,234)</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 text-sm mb-4" data-i18n="player.courseRatingDesc">شاركنا رأيك في هذا الكورس لمساعدة الطلاب الآخرين</p>
-                    <button class="btn-gradient-primary px-4 py-2 text-white rounded-lg font-medium relative z-10" data-i18n="player.rateCourse">قيم الكورس</button>
-                </div>
-
-                <!-- Comments Section -->
-                <div class="bg-gray-800 rounded-lg p-6">
-                    <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-lg font-semibold text-white" data-i18n="player.comments">التعليقات</h3>
-                        <span class="text-gray-400 text-sm">(24)</span>
-                    </div>
-
-                    <!-- Add Comment -->
-                    <div class="mb-6">
-                        <textarea id="commentInput" class="w-full bg-gray-700 text-white rounded-lg p-4 focus:ring-2 focus:ring-primary focus:outline-none resize-none" rows="3" placeholder="اكتب تعليقك هنا..." data-i18n-placeholder="player.writeComment"></textarea>
-                        <div class="flex justify-end mt-2">
-                            <button onclick="addComment()" class="btn-gradient-primary px-6 py-2 text-white rounded-lg font-medium relative z-10" data-i18n="player.postComment">نشر التعليق</button>
-                        </div>
-                    </div>
-
-                    <!-- Comments List -->
-                    <div class="space-y-4" id="commentsList">
-                        <!-- Comment 1 -->
-                        <div class="border-b border-gray-700 pb-4">
-                            <div class="flex items-start space-x-3 rtl:space-x-reverse mb-2">
-                                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-semibold">
-                                    أ
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span class="font-semibold text-white">أحمد محمد</span>
-                                        <span class="text-gray-400 text-xs">منذ ساعتين</span>
+            <!-- Content Area -->
+            <div class="course-player-content">
+                <div style="display: grid; grid-template-columns: 1fr 350px; gap: var(--spacing-lg);">
+                    <!-- Main Content -->
+                    <div>
+                        <!-- Video Player -->
+                        <div class="card" style="margin-bottom: var(--spacing-xl);">
+                            <div style="position: relative; padding-bottom: 56.25%; background: #000; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1E3A5F 0%, #2D4A6F 100%);">
+                                    <div style="text-align: center; color: white;">
+                                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="margin: 0 auto var(--spacing-md); cursor: pointer;" onclick="playVideo()">
+                                            <circle cx="40" cy="40" r="40" fill="rgba(255,255,255,0.2)"/>
+                                            <path d="M32 26L32 54L54 40L32 26Z" fill="white"/>
+                                        </svg>
+                                        <div style="font-size: var(--font-size-lg); font-weight: 600;">Click to play video</div>
                                     </div>
-                                    <p class="text-gray-300 text-sm">شرح واضح ومفيد جداً. شكراً على الجهد المبذول!</p>
-                                    <div class="flex items-center space-x-4 rtl:space-x-reverse mt-2">
-                                        <button class="text-gray-400 hover:text-primary text-sm transition-colors">
-                                            <i class="fas fa-thumbs-up ml-1 rtl:ml-0 rtl:mr-1"></i> 12
-                                        </button>
-                                        <button class="text-gray-400 hover:text-primary text-sm transition-colors" data-i18n="player.reply">رد</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h2 style="font-size: var(--font-size-2xl); font-weight: 700; color: var(--text-primary); margin-bottom: var(--spacing-md);">Advanced Functions and Closures</h2>
+                                <p style="font-size: var(--font-size-base); color: var(--text-secondary); line-height: 1.7; margin-bottom: var(--spacing-lg);">
+                                    In this lesson, we'll explore advanced JavaScript functions including closures, higher-order functions, and function composition. You'll learn how to create powerful, reusable code patterns that are essential for modern JavaScript development.
+                                </p>
+                                <div style="display: flex; gap: var(--spacing-md); flex-wrap: wrap;">
+                                    <div style="display: flex; align-items: center; gap: var(--spacing-sm); color: var(--text-secondary); font-size: var(--font-size-sm);">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <circle cx="8" cy="8" r="6.66667" stroke="currentColor" stroke-width="1.5"/>
+                                            <path d="M8 4V8L10.6667 10.6667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                        <span>15:32</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: var(--spacing-sm); color: var(--text-secondary); font-size: var(--font-size-sm);">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M8 1.33333V8L12 10.6667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                            <circle cx="8" cy="8" r="6.66667" stroke="currentColor" stroke-width="1.5"/>
+                                        </svg>
+                                        <span>Published: Jan 15, 2024</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Comment 2 -->
-                        <div class="border-b border-gray-700 pb-4">
-                            <div class="flex items-start space-x-3 rtl:space-x-reverse mb-2">
-                                <div class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-white font-semibold">
-                                    س
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span class="font-semibold text-white">سارة أحمد</span>
-                                        <span class="text-gray-400 text-xs">منذ 5 ساعات</span>
+                        <!-- Lesson Rating -->
+                        <div class="card" style="margin-bottom: var(--spacing-xl);">
+                            <div class="card-header">
+                                <h3 class="card-title">Rate this Lesson</h3>
+                            </div>
+                            <div class="card-body">
+                                <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+                                    <div style="display: flex; gap: var(--spacing-xs);">
+                                        <button class="star-btn" onclick="rateLesson(1)">★</button>
+                                        <button class="star-btn" onclick="rateLesson(2)">★</button>
+                                        <button class="star-btn" onclick="rateLesson(3)">★</button>
+                                        <button class="star-btn" onclick="rateLesson(4)">★</button>
+                                        <button class="star-btn" onclick="rateLesson(5)">★</button>
                                     </div>
-                                    <p class="text-gray-300 text-sm">هل يمكنك إضافة مثال إضافي على Flexbox؟</p>
-                                    <div class="flex items-center space-x-4 rtl:space-x-reverse mt-2">
-                                        <button class="text-gray-400 hover:text-primary text-sm transition-colors">
-                                            <i class="fas fa-thumbs-up ml-1 rtl:ml-0 rtl:mr-1"></i> 8
-                                        </button>
-                                        <button class="text-gray-400 hover:text-primary text-sm transition-colors" data-i18n="player.reply">رد</button>
-                                    </div>
+                                    <span style="color: var(--text-secondary); font-size: var(--font-size-sm);" id="ratingText">Click to rate</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Comment 3 -->
-                        <div>
-                            <div class="flex items-start space-x-3 rtl:space-x-reverse mb-2">
-                                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-semibold">
-                                    م
+                        <!-- Comments Section -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Student Comments (12)</h3>
+                            </div>
+                            <div class="card-body">
+                                <!-- Comment Form -->
+                                <div style="margin-bottom: var(--spacing-xl); padding-bottom: var(--spacing-xl); border-bottom: 1px solid var(--border-color);">
+                                    <textarea placeholder="Add a comment..." class="select-input" style="width: 100%; min-height: 100px; resize: vertical; margin-bottom: var(--spacing-md);"></textarea>
+                                    <button class="btn-secondary" style="background: var(--primary); color: white; border: none;">Post Comment</button>
                                 </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span class="font-semibold text-white">محمد علي</span>
-                                        <span class="text-gray-400 text-xs">منذ يوم</span>
+
+                                <!-- Comments List -->
+                                <div style="display: flex; flex-direction: column; gap: var(--spacing-lg);">
+                                    <div style="display: flex; gap: var(--spacing-md);">
+                                        <div class="user-avatar" style="width: 40px; height: 40px; flex-shrink: 0;">
+                                            <img src="https://ui-avatars.com/api/?name=Michael+Chen&background=1E3A5F&color=fff" alt="User">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-xs);">
+                                                <div>
+                                                    <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 2px;">Michael Chen</div>
+                                                    <div style="font-size: var(--font-size-xs); color: var(--text-secondary);">2 days ago</div>
+                                                </div>
+                                            </div>
+                                            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--spacing-sm);">Great explanation of closures! The examples really helped me understand the concept better.</p>
+                                            <div style="display: flex; gap: var(--spacing-md);">
+                                                <button style="background: none; border: none; color: var(--text-secondary); font-size: var(--font-size-sm); cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                        <path d="M8 13.3333L3.33333 8L4.66667 6.66667L8 10L11.3333 6.66667L12.6667 8L8 13.3333Z" fill="currentColor"/>
+                                                    </svg>
+                                                    <span>5</span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="text-gray-300 text-sm">ممتاز! استفدت كثيراً من هذا الدرس.</p>
-                                    <div class="flex items-center space-x-4 rtl:space-x-reverse mt-2">
-                                        <button class="text-gray-400 hover:text-primary text-sm transition-colors">
-                                            <i class="fas fa-thumbs-up ml-1 rtl:ml-0 rtl:mr-1"></i> 15
-                                        </button>
-                                        <button class="text-gray-400 hover:text-primary text-sm transition-colors" data-i18n="player.reply">رد</button>
+
+                                    <div style="display: flex; gap: var(--spacing-md);">
+                                        <div class="user-avatar" style="width: 40px; height: 40px; flex-shrink: 0;">
+                                            <img src="https://ui-avatars.com/api/?name=Emma+Wilson&background=A8D5BA&color=1E3A5F" alt="User">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-xs);">
+                                                <div>
+                                                    <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 2px;">Emma Wilson</div>
+                                                    <div style="font-size: var(--font-size-xs); color: var(--text-secondary);">5 days ago</div>
+                                                </div>
+                                            </div>
+                                            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--spacing-sm);">Could you provide more examples of practical use cases for closures in real-world applications?</p>
+                                            <div style="display: flex; gap: var(--spacing-md);">
+                                                <button style="background: none; border: none; color: var(--text-secondary); font-size: var(--font-size-sm); cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                        <path d="M8 13.3333L3.33333 8L4.66667 6.66667L8 10L11.3333 6.66667L12.6667 8L8 13.3333Z" fill="currentColor"/>
+                                                    </svg>
+                                                    <span>3</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar - Course Chapters -->
+                    <div>
+                        <div class="card" style="position: sticky; top: 100px;">
+                            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                                <h3 class="card-title">Course Content</h3>
+                                <div style="display: flex; align-items: center; gap: var(--spacing-sm);">
+                                    <span style="font-size: var(--font-size-xs); color: var(--text-secondary);">65%</span>
+                                    <div style="width: 80px; height: 6px; background: var(--gray-200); border-radius: 3px; overflow: hidden;">
+                                        <div style="height: 100%; width: 65%; background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%); border-radius: 3px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body" style="padding: 0;">
+                                <!-- Chapter 1 -->
+                                <div style="border-bottom: 1px solid var(--border-color);">
+                                    <div class="chapter-header" onclick="toggleChapter(this)" style="padding: var(--spacing-md) var(--spacing-lg); background: var(--gray-50); font-weight: 600; color: var(--text-primary); display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none;">
+                                        <span>Chapter 1: JavaScript Fundamentals</span>
+                                        <div style="display: flex; align-items: center; gap: var(--spacing-sm);">
+                                            <span style="font-size: var(--font-size-xs); color: var(--text-secondary); font-weight: 400;">4/4</span>
+                                            <svg class="chapter-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" style="transition: transform 0.3s ease;">
+                                                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="chapter-content" style="padding: var(--spacing-sm) 0; display: block;">
+                                        <a href="#" style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md) var(--spacing-lg); text-decoration: none; color: var(--text-primary); transition: var(--transition);">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M13.3333 4L6 11.3333L2.66667 8" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span style="flex: 1; font-size: var(--font-size-sm);">Introduction to JavaScript</span>
+                                            <span style="font-size: var(--font-size-xs); color: var(--text-secondary);">12:30</span>
+                                        </a>
+                                        <a href="#" style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md) var(--spacing-lg); text-decoration: none; color: var(--text-primary); transition: var(--transition);">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M13.3333 4L6 11.3333L2.66667 8" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span style="flex: 1; font-size: var(--font-size-sm);">Variables and Data Types</span>
+                                            <span style="font-size: var(--font-size-xs); color: var(--text-secondary);">18:45</span>
+                                        </a>
+                                        <a href="#" style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md) var(--spacing-lg); text-decoration: none; color: var(--text-primary); transition: var(--transition);">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M13.3333 4L6 11.3333L2.66667 8" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span style="flex: 1; font-size: var(--font-size-sm);">Operators and Expressions</span>
+                                            <span style="font-size: var(--font-size-xs); color: var(--text-secondary);">15:20</span>
+                                        </a>
+                                        <a href="#" style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md) var(--spacing-lg); text-decoration: none; color: var(--text-primary); transition: var(--transition);">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M13.3333 4L6 11.3333L2.66667 8" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span style="flex: 1; font-size: var(--font-size-sm);">Control Flow</span>
+                                            <span style="font-size: var(--font-size-xs); color: var(--text-secondary);">20:10</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Chapter 2 -->
+                                <div style="border-bottom: 1px solid var(--border-color);">
+                                    <div class="chapter-header" onclick="toggleChapter(this)" style="padding: var(--spacing-md) var(--spacing-lg); background: var(--gray-50); font-weight: 600; color: var(--text-primary); display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none;">
+                                        <span>Chapter 2: Functions and Scope</span>
+                                        <div style="display: flex; align-items: center; gap: var(--spacing-sm);">
+                                            <span style="font-size: var(--font-size-xs); color: var(--text-secondary); font-weight: 400;">1/5</span>
+                                            <svg class="chapter-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" style="transition: transform 0.3s ease;">
+                                                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="chapter-content" style="padding: var(--spacing-sm) 0; display: block;">
+                                        <a href="#" style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md) var(--spacing-lg); text-decoration: none; color: var(--text-primary); background: var(--primary-50); border-left: 4px solid var(--primary); transition: var(--transition);">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <circle cx="8" cy="8" r="6.66667" stroke="var(--primary)" stroke-width="2"/>
+                                                <path d="M8 4V8L10.6667 10.6667" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                            <span style="flex: 1; font-size: var(--font-size-sm); font-weight: 600;">Advanced Functions and Closures</span>
+                                            <span style="font-size: var(--font-size-xs); color: var(--text-secondary);">15:32</span>
+                                        </a>
+                                        <a href="#" style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md) var(--spacing-lg); text-decoration: none; color: var(--text-secondary); opacity: 0.6; position: relative;">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <circle cx="8" cy="8" r="6.66667" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                            <span style="flex: 1; font-size: var(--font-size-sm);">Arrow Functions</span>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="opacity: 0.5;">
+                                                <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </a>
+                                        <a href="#" style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md) var(--spacing-lg); text-decoration: none; color: var(--text-secondary); opacity: 0.6; position: relative;">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <circle cx="8" cy="8" r="6.66667" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                            <span style="flex: 1; font-size: var(--font-size-sm);">Higher-Order Functions</span>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="opacity: 0.5;">
+                                                <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </a>
+                                        <a href="#" style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md) var(--spacing-lg); text-decoration: none; color: var(--text-secondary); opacity: 0.6; position: relative;">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <circle cx="8" cy="8" r="6.66667" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                            <span style="flex: 1; font-size: var(--font-size-sm);">Function Composition</span>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="opacity: 0.5;">
+                                                <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </a>
+                                        <a href="#" style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md) var(--spacing-lg); text-decoration: none; color: var(--text-secondary); opacity: 0.6; position: relative;">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <circle cx="8" cy="8" r="6.66667" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                            <span style="flex: 1; font-size: var(--font-size-sm);">Recursion</span>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="opacity: 0.5;">
+                                                <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Chapter 3 -->
+                                <div>
+                                    <div class="chapter-header" onclick="toggleChapter(this)" style="padding: var(--spacing-md) var(--spacing-lg); background: var(--gray-50); font-weight: 600; color: var(--text-primary); display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none;">
+                                        <span>Chapter 3: Objects and Arrays</span>
+                                        <div style="display: flex; align-items: center; gap: var(--spacing-sm);">
+                                            <span style="font-size: var(--font-size-xs); color: var(--text-secondary); font-weight: 400;">0/6</span>
+                                            <svg class="chapter-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" style="transition: transform 0.3s ease;">
+                                                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="chapter-content" style="padding: var(--spacing-sm) 0; display: none;">
+                                        <a href="#" style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md) var(--spacing-lg); text-decoration: none; color: var(--text-secondary); opacity: 0.6; position: relative;">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <circle cx="8" cy="8" r="6.66667" stroke="currentColor" stroke-width="2"/>
+                                            </svg>
+                                            <span style="flex: 1; font-size: var(--font-size-sm);">Object Creation</span>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="opacity: 0.5;">
+                                                <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -470,229 +312,68 @@
         </main>
     </div>
 
-    <script src="./src/main.js"></script>
+    <script src="script.js"></script>
+    <script src="language-switcher.js"></script>
+    <script src="dark-mode.js"></script>
     <script>
-        // Current lesson state
-        let currentChapter = 1;
-        let currentLesson = 3;
-        let completedLessons = [1, 2, 3]; // Lessons marked as completed
-        
-        // Toggle chapter
-        function toggleChapter(chapterNum) {
-            const content = document.getElementById(`chapterContent${chapterNum}`);
-            const icon = document.getElementById(`chapterIcon${chapterNum}`);
-            
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.classList.remove('fa-chevron-right');
-                icon.classList.add('fa-chevron-down');
-            } else {
-                content.classList.add('hidden');
-                icon.classList.remove('fa-chevron-down');
-                icon.classList.add('fa-chevron-right');
-            }
+        function playVideo() {
+            alert('Video player would start here');
         }
-        
-        // Load lesson
-        function loadLesson(chapter, lesson) {
-            currentChapter = chapter;
-            currentLesson = lesson;
+
+        function rateLesson(rating) {
+            const stars = document.querySelectorAll('.star-btn');
+            const ratingText = document.getElementById('ratingText');
             
-            // Update active lesson
-            document.querySelectorAll('.lesson-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            event.currentTarget.classList.add('active');
-            
-            // Update video title and description (in real app, fetch from API)
-            const titles = {
-                '1-1': { title: 'مقدمة الكورس', desc: 'مرحباً بك في دورة تطوير الويب الكاملة...', meta: 'الفصل الأول • الدرس 1 • 5:30' },
-                '1-2': { title: 'ما هو HTML؟', desc: 'تعرف على لغة HTML وأهميتها...', meta: 'الفصل الأول • الدرس 2 • 8:15' },
-                '1-3': { title: 'هيكل HTML الأساسي', desc: 'في هذا الدرس، سنتعلم الهيكل الأساسي لصفحة HTML...', meta: 'الفصل الأول • الدرس 3 • 12:45' },
-            };
-            
-            const key = `${chapter}-${lesson}`;
-            const lessonData = titles[key] || { title: `الدرس ${lesson}`, desc: 'وصف الدرس...', meta: `الفصل ${chapter} • الدرس ${lesson}` };
-            
-            document.getElementById('videoTitle').textContent = lessonData.title;
-            document.getElementById('videoDescription').textContent = lessonData.desc;
-            document.getElementById('videoMeta').textContent = lessonData.meta;
-            
-            // Mark as completed if already completed
-            if (completedLessons.includes(lesson)) {
-                event.currentTarget.classList.add('completed');
-            }
-        }
-        
-        // Mark lesson as complete
-        function markAsComplete() {
-            if (!completedLessons.includes(currentLesson)) {
-                completedLessons.push(currentLesson);
-                
-                // Update UI
-                const activeLesson = document.querySelector('.lesson-item.active');
-                if (activeLesson) {
-                    activeLesson.classList.add('completed');
-                    const checkIcon = activeLesson.querySelector('.lesson-check');
-                    checkIcon.classList.remove('far', 'fa-circle');
-                    checkIcon.classList.add('fas', 'fa-check-circle');
-                    checkIcon.style.color = '#93C572';
-                }
-                
-                // Update progress
-                updateProgress();
-                
-                // Show notification
-                showNotification('تم إكمال الدرس بنجاح!');
-            }
-        }
-        
-        // Update progress
-        function updateProgress() {
-            const totalLessons = 15; // Total lessons in course
-            const progress = (completedLessons.length / totalLessons) * 100;
-            
-            document.getElementById('courseProgress').textContent = Math.round(progress) + '%';
-            document.getElementById('progressBar').style.width = progress + '%';
-        }
-        
-        // Next lesson
-        function nextLesson() {
-            if (currentLesson < 5) {
-                loadLesson(currentChapter, currentLesson + 1);
-            }
-        }
-        
-        // Previous lesson
-        function previousLesson() {
-            if (currentLesson > 1) {
-                loadLesson(currentChapter, currentLesson - 1);
-            }
-        }
-        
-        // Rating system
-        document.querySelectorAll('#lessonRating i').forEach(star => {
-            star.addEventListener('click', function() {
-                const rating = parseInt(this.getAttribute('data-rating'));
-                const stars = document.querySelectorAll('#lessonRating i');
-                
-                stars.forEach((s, index) => {
-                    if (index < rating) {
-                        s.classList.remove('far');
-                        s.classList.add('fas');
-                        s.style.color = '#fbbf24';
-                    } else {
-                        s.classList.remove('fas');
-                        s.classList.add('far');
-                        s.style.color = '';
-                    }
-                });
-                
-                document.getElementById('ratingText').textContent = `تم التقييم: ${rating}/5`;
-            });
-            
-            star.addEventListener('mouseenter', function() {
-                const rating = parseInt(this.getAttribute('data-rating'));
-                const stars = document.querySelectorAll('#lessonRating i');
-                
-                stars.forEach((s, index) => {
-                    if (index < rating) {
-                        s.style.color = '#fbbf24';
-                    }
-                });
-            });
-        });
-        
-        // Add comment
-        function addComment() {
-            const commentText = document.getElementById('commentInput').value;
-            if (!commentText.trim()) return;
-            
-            const commentsList = document.getElementById('commentsList');
-            const newComment = document.createElement('div');
-            newComment.className = 'border-b border-gray-700 pb-4';
-            newComment.innerHTML = `
-                <div class="flex items-start space-x-3 rtl:space-x-reverse mb-2">
-                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-semibold">
-                        ط
-                    </div>
-                    <div class="flex-1">
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="font-semibold text-white">أنت</span>
-                            <span class="text-gray-400 text-xs">الآن</span>
-                        </div>
-                        <p class="text-gray-300 text-sm">${commentText}</p>
-                        <div class="flex items-center space-x-4 rtl:space-x-reverse mt-2">
-                            <button class="text-gray-400 hover:text-primary text-sm transition-colors">
-                                <i class="fas fa-thumbs-up ml-1 rtl:ml-0 rtl:mr-1"></i> 0
-                            </button>
-                            <button class="text-gray-400 hover:text-primary text-sm transition-colors" data-i18n="player.reply">رد</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            commentsList.insertBefore(newComment, commentsList.firstChild);
-            document.getElementById('commentInput').value = '';
-            
-            showNotification('تم نشر التعليق بنجاح!');
-        }
-        
-        // Show notification
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.className = 'fixed bottom-4 right-4 rtl:right-auto rtl:left-4 bg-primary text-white px-6 py-3 rounded-lg shadow-lg z-50';
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
-        
-        // Sidebar toggle for mobile
-        function toggleSidebar() {
-            const drawer = document.getElementById('mobileDrawer');
-            if (drawer) {
-                if (drawer.style.display === 'none' || !drawer.classList.contains('active')) {
-                    drawer.style.display = 'block';
-                    drawer.classList.add('active');
-                    // Copy chapters to mobile drawer
-                    const desktopChapters = document.getElementById('chaptersList');
-                    const mobileChapters = document.getElementById('mobileChaptersList');
-                    if (desktopChapters && mobileChapters) {
-                        mobileChapters.innerHTML = desktopChapters.innerHTML;
-                    }
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.style.color = '#FBBF24';
+                    star.textContent = '★';
                 } else {
-                    drawer.classList.remove('active');
-                    setTimeout(() => {
-                        drawer.style.display = 'none';
-                    }, 300);
+                    star.style.color = 'var(--text-secondary)';
+                    star.textContent = '☆';
                 }
+            });
+            
+            ratingText.textContent = `Rated ${rating} out of 5`;
+        }
+
+        function toggleChapter(header) {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('.chapter-arrow');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                content.style.display = 'none';
+                arrow.style.transform = 'rotate(0deg)';
             }
         }
-        
-        // Close drawer when clicking overlay
-        document.getElementById('mobileDrawer')?.addEventListener('click', (e) => {
-            if (e.target.id === 'mobileDrawer') {
-                toggleSidebar();
-            }
-        });
-        
-        // Fullscreen toggle
-        document.getElementById('fullscreenToggle')?.addEventListener('click', () => {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen();
+
+        function goBack() {
+            if (document.referrer) {
+                window.history.back();
             } else {
-                document.exitFullscreen();
+                window.location.href = 'my-courses.html';
             }
-        });
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            updateProgress();
-        });
+        }
     </script>
+    <style>
+        .star-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0;
+            line-height: 1;
+        }
+        .star-btn:hover {
+            color: #FBBF24;
+            transform: scale(1.1);
+        }
+    </style>
 </body>
 </html>
 

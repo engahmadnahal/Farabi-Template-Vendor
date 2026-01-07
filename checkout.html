@@ -1,371 +1,268 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الدفع - Farabi Academy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            DEFAULT: '#93C572',
-                            light: '#B4D99A',
-                            dark: '#7BA85A',
-                        },
-                        secondary: {
-                            DEFAULT: '#0f172a',
-                            light: '#1e293b',
-                            dark: '#020617',
-                        },
-                    },
-                    fontFamily: {
-                        arabic: ['Cairo', 'Tajawal', 'Arial', 'sans-serif'],
-                        english: ['Inter', 'Roboto', 'Arial', 'sans-serif'],
-                    },
-                },
-            },
-        }
-    </script>
-    <link rel="stylesheet" href="./dist/output.css">
-    <link rel="stylesheet" href="./src/enhancements.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Checkout - Farabi Academy</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://js.stripe.com/v3/"></script>
-    <style>
-        body {
-            font-family: 'Inter', 'Roboto', Arial, sans-serif;
-        }
-        [dir="rtl"] body {
-            font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
-        }
-        
-        .StripeElement {
-            box-sizing: border-box;
-            height: 50px;
-            padding: 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 0.5rem;
-            background-color: white;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        }
-        
-        .StripeElement--focus {
-            border-color: #93C572;
-            box-shadow: 0 0 0 3px rgba(147, 197, 114, 0.1);
-        }
-        
-        .StripeElement--invalid {
-            border-color: #ef4444;
-        }
-        
-        .StripeElement--complete {
-            border-color: #93C572;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-50 text-gray-900">
-    <!-- Navbar -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
-            <div class="flex justify-between items-center h-14 sm:h-16">
-                <div class="flex items-center space-x-2 sm:space-x-4 rtl:space-x-reverse">
-                    <a href="index.html" class="flex items-center space-x-1 sm:space-x-2 rtl:space-x-reverse">
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary to-primary-dark rounded-lg flex items-center justify-center">
-                            <i class="fas fa-graduation-cap text-white text-sm sm:text-lg"></i>
-                        </div>
-                        <span class="text-base sm:text-xl font-bold text-secondary hidden sm:inline">Farabi Academy</span>
-                    </a>
-                </div>
-
-                <div class="flex items-center space-x-2 sm:space-x-4 rtl:space-x-reverse">
-                    <a href="cart.html" class="relative text-gray-700 hover:text-primary transition-colors p-2">
-                        <i class="fas fa-shopping-cart text-base sm:text-xl"></i>
-                        <span id="cartCount" class="absolute -top-1 -right-1 rtl:right-auto rtl:-left-1 bg-primary text-white text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center font-bold text-[10px] sm:text-xs">0</span>
-                    </a>
-                    <button id="languageToggle" class="flex items-center space-x-1 sm:space-x-2 rtl:space-x-reverse px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-globe text-primary text-sm sm:text-base"></i>
-                        <span class="font-medium text-xs sm:text-sm hidden sm:inline" id="currentLang">العربية</span>
-                    </button>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="40" height="40" rx="10" fill="url(#farabiGradient)"/>
+                        <defs>
+                            <linearGradient id="farabiGradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#A8D5BA"/>
+                                <stop offset="1" stop-color="#1E3A5F"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M20 12L26 18L20 24M14 18H26" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="20" cy="20" r="18" stroke="white" stroke-width="1.5" stroke-opacity="0.3"/>
+                    </svg>
+                    <span class="logo-text">Farabi Academy</span>
                 </div>
             </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Page Header -->
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-secondary mb-2" data-i18n="checkout.title">إتمام الدفع</h1>
-            <p class="text-gray-600" data-i18n="checkout.subtitle">أكمل بياناتك لإتمام عملية الشراء</p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Checkout Form -->
-            <div class="lg:col-span-2 space-y-6">
-                <!-- Student Information -->
-                <div class="bg-white rounded-xl shadow-md p-6">
-                    <h2 class="text-xl font-bold text-secondary mb-6" data-i18n="checkout.studentInfo">معلومات الطالب</h2>
-                    <form id="checkoutForm" class="space-y-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="checkout.firstName">الاسم الأول</label>
-                                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="أحمد">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="checkout.lastName">اسم العائلة</label>
-                                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="محمد">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="checkout.email">البريد الإلكتروني</label>
-                            <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="ahmed@example.com">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="checkout.phone">رقم الهاتف</label>
-                            <input type="tel" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="+966 50 123 4567">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="checkout.address">العنوان</label>
-                            <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="شارع الملك فهد، الرياض">
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="checkout.city">المدينة</label>
-                                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="الرياض">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="checkout.country">الدولة</label>
-                                <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                                    <option value="SA" data-i18n="checkout.saudi">السعودية</option>
-                                    <option value="AE" data-i18n="checkout.uae">الإمارات</option>
-                                    <option value="KW" data-i18n="checkout.kuwait">الكويت</option>
-                                    <option value="QA" data-i18n="checkout.qatar">قطر</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="checkout.zipCode">الرمز البريدي</label>
-                                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="12345">
-                            </div>
-                        </div>
-                    </form>
+            
+            <nav class="sidebar-nav">
+                <a href="student-dashboard.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M2.5 10L9.16667 3.33333L9.16667 8.33333L17.5 8.33333L17.5 11.6667L9.16667 11.6667L9.16667 16.6667L2.5 10Z" fill="currentColor"/>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="my-courses.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M2.5 5.83333L10 2.5L17.5 5.83333V15L10 17.5L2.5 15V5.83333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 2.5V17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2.5 5.83333L10 9.16667L17.5 5.83333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>My Courses</span>
+                </a>
+                <a href="marketplace.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M2.5 2.5H17.5V17.5H2.5V2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7.5 7.5H12.5M7.5 12.5H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span>Marketplace</span>
+                </a>
+                <a href="cart.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M5 5H15L14.1667 13.3333H5.83333L5 5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5 5L3.33333 2.5H1.66667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="7.5" cy="17.5" r="1.25" fill="currentColor"/>
+                        <circle cx="13.75" cy="17.5" r="1.25" fill="currentColor"/>
+                    </svg>
+                    <span>Cart</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=A8D5BA&color=1E3A5F" alt="User">
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">Sarah Johnson</div>
+                        <div class="user-role">Student</div>
+                    </div>
                 </div>
+            </div>
+        </aside>
 
-                <!-- Payment Method -->
-                <div class="bg-white rounded-xl shadow-md p-6">
-                    <h2 class="text-xl font-bold text-secondary mb-6" data-i18n="checkout.paymentMethod">طريقة الدفع</h2>
-                    
-                    <!-- Payment Options -->
-                    <div class="space-y-4 mb-6">
-                        <label class="flex items-center p-4 border-2 border-primary rounded-lg cursor-pointer hover:bg-primary/5 transition-colors">
-                            <input type="radio" name="paymentMethod" value="card" checked class="mr-3 rtl:mr-0 rtl:ml-3 text-primary focus:ring-primary">
-                            <div class="flex-1">
-                                <div class="flex items-center">
-                                    <i class="fas fa-credit-card text-primary text-xl ml-3 rtl:ml-0 rtl:mr-3"></i>
-                                    <span class="font-semibold text-gray-900" data-i18n="checkout.card">بطاقة ائتمانية</span>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <h1 class="page-title">Checkout</h1>
+                    <p class="page-subtitle">Complete your purchase securely</p>
+                </div>
+                <div class="topbar-right">
+                    <div class="language-switcher">
+                        <button class="active" onclick="switchLanguage('en')">EN</button>
+                        <span class="divider"></span>
+                        <button onclick="switchLanguage('ar')">AR</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--spacing-xl);">
+                    <!-- Payment Form -->
+                    <div>
+                        <!-- Billing Information -->
+                        <div class="card" style="margin-bottom: var(--spacing-xl);">
+                            <div class="card-header">
+                                <h3 class="card-title">Billing Information</h3>
+                            </div>
+                            <div class="card-body">
+                                <div style="display: flex; flex-direction: column; gap: var(--spacing-lg);">
+                                    <div>
+                                        <label style="display: block; font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--text-primary);">Full Name</label>
+                                        <input type="text" value="Sarah Johnson" class="select-input" style="width: 100%;">
+                                    </div>
+                                    <div>
+                                        <label style="display: block; font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--text-primary);">Email Address</label>
+                                        <input type="email" value="sarah@example.com" class="select-input" style="width: 100%;">
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+                                        <div>
+                                            <label style="display: block; font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--text-primary);">Phone</label>
+                                            <input type="tel" value="+1 234 567 8900" class="select-input" style="width: 100%;">
+                                        </div>
+                                        <div>
+                                            <label style="display: block; font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--text-primary);">Country</label>
+                                            <select class="select-input" style="width: 100%;">
+                                                <option>United States</option>
+                                                <option>Canada</option>
+                                                <option>United Kingdom</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="text-sm text-gray-500 mt-1" data-i18n="checkout.cardDesc">Visa, Mastercard, American Express</p>
                             </div>
-                        </label>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="card" style="margin-bottom: var(--spacing-xl);">
+                            <div class="card-header">
+                                <h3 class="card-title">Payment Method</h3>
+                            </div>
+                            <div class="card-body">
+                                <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                                    <!-- Credit Card Option -->
+                                    <label style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md); border: 2px solid var(--primary); border-radius: var(--border-radius); cursor: pointer; background: var(--primary-50);">
+                                        <input type="radio" name="payment" checked style="width: 20px; height: 20px;">
+                                        <div style="flex: 1;">
+                                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Credit/Debit Card</div>
+                                            <div style="font-size: var(--font-size-xs); color: var(--text-secondary);">Visa, Mastercard, American Express</div>
+                                        </div>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M20 4H4C2.89 4 2 4.89 2 6V18C2 19.11 2.89 20 4 20H20C21.11 20 22 19.11 22 18V6C22 4.89 21.11 4 20 4Z" stroke="currentColor" stroke-width="2"/>
+                                            <path d="M2 10H22" stroke="currentColor" stroke-width="2"/>
+                                        </svg>
+                                    </label>
+
+                                    <!-- Card Details -->
+                                    <div style="padding: var(--spacing-lg); background: var(--gray-50); border-radius: var(--border-radius); border: 1px solid var(--border-color);">
+                                        <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                                            <div>
+                                                <label style="display: block; font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--text-primary); font-size: var(--font-size-sm);">Card Number</label>
+                                                <input type="text" placeholder="1234 5678 9012 3456" class="select-input" style="width: 100%;">
+                                            </div>
+                                            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--spacing-md);">
+                                                <div>
+                                                    <label style="display: block; font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--text-primary); font-size: var(--font-size-sm);">Expiry Date</label>
+                                                    <input type="text" placeholder="MM/YY" class="select-input" style="width: 100%;">
+                                                </div>
+                                                <div>
+                                                    <label style="display: block; font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--text-primary); font-size: var(--font-size-sm);">CVV</label>
+                                                    <input type="text" placeholder="123" class="select-input" style="width: 100%;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- PayPal Option -->
+                                    <label style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md); border: 2px solid var(--border-color); border-radius: var(--border-radius); cursor: pointer; transition: var(--transition);">
+                                        <input type="radio" name="payment" style="width: 20px; height: 20px;">
+                                        <div style="flex: 1;">
+                                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">PayPal</div>
+                                            <div style="font-size: var(--font-size-xs); color: var(--text-secondary);">Pay securely with PayPal</div>
+                                        </div>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M7.076 21.337C7.046 21.337 7.016 21.337 6.986 21.337C6.956 21.337 6.926 21.337 6.896 21.337" stroke="currentColor" stroke-width="2"/>
+                                        </svg>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security Badge -->
+                        <div style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md); background: var(--primary-50); border-radius: var(--border-radius); border: 1px solid var(--primary-light);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 1L3 5V11C3 16.55 6.16 21.74 12 23C17.84 21.74 21 16.55 21 11V5L12 1Z" stroke="var(--primary)" stroke-width="2" fill="var(--primary)" fill-opacity="0.1"/>
+                                <path d="M9 12L11 14L15 10" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <div>
+                                <div style="font-weight: 600; color: var(--secondary); font-size: var(--font-size-sm);">Secure Payment</div>
+                                <div style="font-size: var(--font-size-xs); color: var(--text-secondary);">Your payment information is encrypted and secure</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Stripe Card Element -->
-                    <div id="card-element" class="mb-4">
-                        <!-- Stripe Elements will create form elements here -->
-                    </div>
-                    <div id="card-errors" class="text-red-500 text-sm mb-4" role="alert"></div>
+                    <!-- Order Summary -->
+                    <div class="card" style="height: fit-content; position: sticky; top: 100px;">
+                        <div class="card-header">
+                            <h3 class="card-title">Order Summary</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- Course Items -->
+                            <div style="display: flex; flex-direction: column; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
+                                <div style="display: flex; gap: var(--spacing-md);">
+                                    <div class="course-thumbnail" style="background: linear-gradient(135deg, #A8D5BA 0%, #1E3A5F 100%); width: 60px; height: 40px; border-radius: var(--border-radius-sm); flex-shrink: 0;"></div>
+                                    <div style="flex: 1; min-width: 0;">
+                                        <div style="font-size: var(--font-size-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Advanced JavaScript Mastery</div>
+                                        <div style="font-size: var(--font-size-xs); color: var(--text-secondary);">$99.00</div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: var(--spacing-md);">
+                                    <div class="course-thumbnail" style="background: linear-gradient(135deg, #F093FB 0%, #F5576C 100%); width: 60px; height: 40px; border-radius: var(--border-radius-sm); flex-shrink: 0;"></div>
+                                    <div style="flex: 1; min-width: 0;">
+                                        <div style="font-size: var(--font-size-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">React Masterclass</div>
+                                        <div style="font-size: var(--font-size-xs); color: var(--text-secondary);">$79.00</div>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <!-- Security Badge -->
-                    <div class="flex items-center justify-center p-4 bg-gray-50 rounded-lg">
-                        <i class="fas fa-lock text-primary text-xl ml-2 rtl:ml-0 rtl:mr-2"></i>
-                        <span class="text-sm text-gray-600" data-i18n="checkout.secure">معاملات آمنة ومشفرة</span>
+                            <div style="height: 1px; background: var(--border-color); margin-bottom: var(--spacing-lg);"></div>
+
+                            <!-- Price Breakdown -->
+                            <div style="display: flex; flex-direction: column; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: var(--text-secondary);">Subtotal</span>
+                                    <span style="font-weight: 600; color: var(--text-primary);">$178.00</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: var(--text-secondary);">Tax</span>
+                                    <span style="font-weight: 600; color: var(--text-primary);">$14.24</span>
+                                </div>
+                                <div style="height: 1px; background: var(--border-color); margin: var(--spacing-sm) 0;"></div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="font-size: var(--font-size-lg); font-weight: 700; color: var(--text-primary);">Total</span>
+                                    <span style="font-size: var(--font-size-2xl); font-weight: 700; color: var(--secondary);">$192.24</span>
+                                </div>
+                            </div>
+
+                            <button class="btn-secondary" style="width: 100%; text-align: center; display: block; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; border: none; padding: var(--spacing-md) var(--spacing-lg); font-size: var(--font-size-base); font-weight: 600;" onclick="processPayment()">Complete Purchase</button>
+                            
+                            <div style="margin-top: var(--spacing-lg); text-align: center;">
+                                <a href="cart.html" style="color: var(--text-secondary); text-decoration: none; font-size: var(--font-size-sm);">← Back to Cart</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </main>
+    </div>
 
-            <!-- Order Summary -->
-            <div class="lg:col-span-1">
-                <div class="bg-white rounded-xl shadow-md p-6 sticky top-24">
-                    <h2 class="text-xl font-bold text-secondary mb-6" data-i18n="checkout.orderSummary">ملخص الطلب</h2>
-                    
-                    <!-- Order Items -->
-                    <div id="orderItems" class="space-y-4 mb-6">
-                        <!-- Items will be loaded here -->
-                    </div>
-
-                    <!-- Divider -->
-                    <div class="border-t border-gray-200 my-6"></div>
-
-                    <!-- Price Breakdown -->
-                    <div class="space-y-3 mb-6">
-                        <div class="flex justify-between text-gray-600">
-                            <span data-i18n="checkout.subtotal">المجموع الفرعي</span>
-                            <span id="subtotal">$0.00</span>
-                        </div>
-                        <div class="flex justify-between text-gray-600">
-                            <span data-i18n="checkout.tax">الضريبة</span>
-                            <span id="tax">$0.00</span>
-                        </div>
-                        <div class="flex justify-between text-gray-600">
-                            <span data-i18n="checkout.discount">الخصم</span>
-                            <span class="text-primary" id="discount">-$0.00</span>
-                        </div>
-                    </div>
-
-                    <!-- Divider -->
-                    <div class="border-t border-gray-200 my-6"></div>
-
-                    <!-- Total -->
-                    <div class="flex justify-between items-center mb-6">
-                        <span class="text-lg font-bold text-gray-900" data-i18n="checkout.total">الإجمالي</span>
-                        <span class="text-2xl font-bold text-secondary" id="total">$0.00</span>
-                    </div>
-
-                    <!-- Checkout Button -->
-                    <button id="submitButton" class="btn-gradient-primary w-full px-6 py-4 text-white rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 rtl:space-x-reverse relative z-10">
-                        <i class="fas fa-lock relative z-10"></i>
-                        <span class="relative z-10" data-i18n="checkout.completePayment">إتمام الدفع</span>
-                    </button>
-
-                    <!-- Trust Badges -->
-                    <div class="mt-6 flex items-center justify-center space-x-4 rtl:space-x-reverse">
-                        <img src="https://stripe.com/img/v3/home/social.png" alt="Stripe" class="h-8 opacity-60">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-secondary text-white mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="text-center">
-                <div class="flex items-center justify-center space-x-2 rtl:space-x-reverse mb-4">
-                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                        <i class="fas fa-graduation-cap text-white"></i>
-                    </div>
-                    <span class="text-xl font-bold">Farabi Academy</span>
-                </div>
-                <p class="text-gray-300" data-i18n="footer.copyright">© 2024 Farabi Academy. جميع الحقوق محفوظة.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="./src/main.js"></script>
-    <script src="./src/cart.js"></script>
+    <script src="script.js"></script>
+    <script src="language-switcher.js"></script>
     <script>
-        // Initialize Stripe (Replace with your publishable key)
-        const stripe = Stripe('pk_test_51QKexample'); // Replace with actual Stripe key
-        const elements = stripe.elements();
-        
-        // Create card element
-        const cardElement = elements.create('card', {
-            style: {
-                base: {
-                    fontSize: '16px',
-                    color: '#424770',
-                    '::placeholder': {
-                        color: '#aab7c4',
-                    },
-                },
-            },
-        });
-        
-        cardElement.mount('#card-element');
-        
-        // Handle real-time validation errors
-        cardElement.on('change', ({error}) => {
-            const displayError = document.getElementById('card-errors');
-            if (error) {
-                displayError.textContent = error.message;
-            } else {
-                displayError.textContent = '';
+        function processPayment() {
+            if (confirm('Complete purchase for $192.24?')) {
+                alert('Payment processed successfully! Redirecting to your courses...');
+                window.location.href = 'my-courses.html';
             }
-        });
-        
-        // Load order summary
-        function loadOrderSummary() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const orderItems = document.getElementById('orderItems');
-            const subtotalEl = document.getElementById('subtotal');
-            const taxEl = document.getElementById('tax');
-            const discountEl = document.getElementById('discount');
-            const totalEl = document.getElementById('total');
-            
-            if (cart.length === 0) {
-                window.location.href = 'cart.html';
-                return;
-            }
-            
-            let subtotal = 0;
-            orderItems.innerHTML = '';
-            
-            cart.forEach(item => {
-                subtotal += item.price * item.quantity;
-                
-                const orderItem = document.createElement('div');
-                orderItem.className = 'flex items-center justify-between';
-                orderItem.innerHTML = `
-                    <div class="flex-1">
-                        <h4 class="font-semibold text-gray-900">${item.name}</h4>
-                        <p class="text-sm text-gray-500">${item.quantity} × $${item.price.toFixed(2)}</p>
-                    </div>
-                    <span class="font-semibold text-gray-900">$${(item.price * item.quantity).toFixed(2)}</span>
-                `;
-                orderItems.appendChild(orderItem);
-            });
-            
-            const tax = subtotal * 0.15; // 15% tax
-            const discount = subtotal * 0.1; // 10% discount
-            const total = subtotal + tax - discount;
-            
-            subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-            taxEl.textContent = `$${tax.toFixed(2)}`;
-            discountEl.textContent = `-$${discount.toFixed(2)}`;
-            totalEl.textContent = `$${total.toFixed(2)}`;
         }
-        
-        // Handle form submission
-        const form = document.getElementById('checkoutForm');
-        const submitButton = document.getElementById('submitButton');
-        
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span data-i18n="checkout.processing">جاري المعالجة...</span>';
-            
-            // Create payment method
-            const {error, paymentMethod} = await stripe.createPaymentMethod({
-                type: 'card',
-                card: cardElement,
-            });
-            
-            if (error) {
-                const displayError = document.getElementById('card-errors');
-                displayError.textContent = error.message;
-                submitButton.disabled = false;
-                submitButton.innerHTML = '<i class="fas fa-lock"></i> <span data-i18n="checkout.completePayment">إتمام الدفع</span>';
-            } else {
-                // Here you would send paymentMethod.id to your server
-                // For demo purposes, we'll just show a success message
-                setTimeout(() => {
-                    alert('تم إتمام الدفع بنجاح! (هذا مثال - يحتاج إلى إعداد Stripe من الخادم)');
-                    localStorage.removeItem('cart');
-                    window.location.href = 'my-courses.html';
-                }, 1500);
-            }
-        });
-        
-        // Load order summary on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            loadOrderSummary();
-            updateCartCount();
-        });
     </script>
 </body>
 </html>

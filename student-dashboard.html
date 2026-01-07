@@ -31,7 +31,7 @@
             </div>
             
             <nav class="sidebar-nav">
-                <a href="index.html" class="nav-item active">
+                <a href="student-dashboard.html" class="nav-item active">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M2.5 10L9.16667 3.33333L9.16667 8.33333L17.5 8.33333L17.5 11.6667L9.16667 11.6667L9.16667 16.6667L2.5 10Z" fill="currentColor"/>
                     </svg>
@@ -64,7 +64,7 @@
             </nav>
             
             <div class="sidebar-footer">
-                    <div class="user-profile">
+                <div class="user-profile">
                     <div class="user-avatar">
                         <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=A8D5BA&color=1E3A5F" alt="User">
                     </div>
@@ -85,20 +85,6 @@
                     <p class="page-subtitle">Track your learning progress and achievements</p>
                 </div>
                 <div class="topbar-right">
-                    <button class="mobile-menu-toggle" aria-label="Toggle menu">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                    <button class="dark-mode-toggle" aria-label="Toggle dark mode">
-                        <svg class="sun-icon" width="14" height="14" viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
-                            <path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        <svg class="moon-icon" width="14" height="14" viewBox="0 0 24 24" fill="none">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
                     <div class="language-switcher">
                         <button class="active" onclick="switchLanguage('en')">EN</button>
                         <span class="divider"></span>
@@ -116,7 +102,7 @@
                 </div>
             </header>
 
-            <!-- Dashboard Content -->
+            <!-- Content Area -->
             <div class="content-area">
                 <!-- Profile Section -->
                 <div class="card" style="margin-bottom: var(--spacing-xl);">
@@ -217,8 +203,7 @@
                     <div class="card-body">
                         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--spacing-lg);">
                             <div class="course-card">
-                                <div class="course-thumbnail" style="height: 180px; border-radius: var(--border-radius-lg); margin-bottom: var(--spacing-md); position: relative; overflow: hidden;">
-                                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=250&fit=crop" alt="Advanced JavaScript Mastery" style="width: 100%; height: 100%; object-fit: cover;">
+                                <div class="course-thumbnail" style="background: linear-gradient(135deg, #A8D5BA 0%, #1E3A5F 100%); height: 180px; border-radius: var(--border-radius-lg); margin-bottom: var(--spacing-md); position: relative; overflow: hidden;">
                                     <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); padding: var(--spacing-sm); color: white; font-size: var(--font-size-xs);">
                                         <div style="display: flex; justify-content: space-between; align-items: center;">
                                             <span>24 lessons</span>
@@ -241,8 +226,7 @@
                             </div>
 
                             <div class="course-card">
-                                <div class="course-thumbnail" style="height: 180px; border-radius: var(--border-radius-lg); margin-bottom: var(--spacing-md); position: relative; overflow: hidden;">
-                                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=250&fit=crop" alt="React Masterclass" style="width: 100%; height: 100%; object-fit: cover;">
+                                <div class="course-thumbnail" style="background: linear-gradient(135deg, #F093FB 0%, #F5576C 100%); height: 180px; border-radius: var(--border-radius-lg); margin-bottom: var(--spacing-md); position: relative; overflow: hidden;">
                                     <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); padding: var(--spacing-sm); color: white; font-size: var(--font-size-xs);">
                                         <div style="display: flex; justify-content: space-between; align-items: center;">
                                             <span>18 lessons</span>
@@ -268,8 +252,7 @@
                             </div>
 
                             <div class="course-card">
-                                <div class="course-thumbnail" style="height: 180px; border-radius: var(--border-radius-lg); margin-bottom: var(--spacing-md); position: relative; overflow: hidden;">
-                                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=250&fit=crop" alt="UI/UX Design Fundamentals" style="width: 100%; height: 100%; object-fit: cover;">
+                                <div class="course-thumbnail" style="background: linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%); height: 180px; border-radius: var(--border-radius-lg); margin-bottom: var(--spacing-md); position: relative; overflow: hidden;">
                                     <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); padding: var(--spacing-sm); color: white; font-size: var(--font-size-xs);">
                                         <div style="display: flex; justify-content: space-between; align-items: center;">
                                             <span>32 lessons</span>
@@ -370,10 +353,8 @@
         </main>
     </div>
 
-    <div class="sidebar-overlay"></div>
     <script src="script.js"></script>
     <script src="language-switcher.js"></script>
-    <script src="dark-mode.js"></script>
 </body>
 </html>
 
