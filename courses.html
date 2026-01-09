@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse all courses at Farabi Academy - Filter by rating, category, price, and search">
+  <title>All Courses - Farabi Academy</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="theme/assets/css/main.css">
+  
+  <!-- Tailwind Config for Custom Colors -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            pistachio: '#93c572',
+            'pistachio-dark': '#7db157',
+            navy: '#1e3a5f',
+            'navy-dark': '#152a45',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900">
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm" id="navigation">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <!-- Logo -->
+        <div class="flex-shrink-0">
+          <a href="index.html" class="flex items-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pistachio to-navy flex items-center justify-center">
+              <span class="font-bold text-white">FA</span>
+            </div>
+            <span class="font-bold text-xl text-gray-900 dark:text-white" data-i18n="nav.brand">
+              Farabi Academy
+            </span>
+          </a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html#about" class="text-gray-700 dark:text-gray-300 hover:text-pistachio dark:hover:text-pistachio transition-colors">
+            About Us
+          </a>
+          <a href="courses.html" class="text-pistachio dark:text-pistachio font-semibold">
+            Our Courses
+          </a>
+          <a href="index.html#reviews" class="text-gray-700 dark:text-gray-300 hover:text-pistachio dark:hover:text-pistachio transition-colors">
+            Success Stories
+          </a>
+          <a href="index.html#contact" class="text-gray-700 dark:text-gray-300 hover:text-pistachio dark:hover:text-pistachio transition-colors">
+            Contact Us
+          </a>
+          
+          <!-- Action Buttons -->
+          <a href="index.html#register" class="px-6 py-2 bg-pistachio text-white rounded-full hover:bg-pistachio-dark transition-all hover:shadow-lg">
+            Register Now
+          </a>
+          
+          <a href="student-dashboard.html" class="px-6 py-2 border-2 border-navy text-navy dark:text-white dark:border-white rounded-full hover:bg-navy hover:text-white dark:hover:bg-white dark:hover:text-navy transition-all">
+            Login
+          </a>
+
+          <!-- Language Toggle -->
+          <button
+            data-language-toggle
+            class="flex items-center gap-2 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            aria-label="Toggle language"
+          >
+            <svg class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm font-medium text-gray-700 dark:text-gray-300" data-language-label>EN</span>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center gap-2">
+          <button
+            data-language-toggle
+            class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+            aria-label="Toggle language"
+          >
+            <svg class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </button>
+
+          <button
+            data-mobile-menu-toggle
+            class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+            aria-label="Toggle menu"
+          >
+            <svg data-menu-icon="close" class="w-6 h-6 text-gray-700 dark:text-gray-300 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            <svg data-menu-icon="menu" class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu md:hidden pb-4 hidden" data-mobile-menu>
+        <div class="flex flex-col gap-3">
+          <a href="index.html#about" class="text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+            About Us
+          </a>
+          <a href="courses.html" class="text-left px-4 py-2 text-pistachio font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+            Our Courses
+          </a>
+          <a href="index.html#reviews" class="text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+            Success Stories
+          </a>
+          <a href="index.html#contact" class="text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+            Contact Us
+          </a>
+          <a href="index.html#register" class="px-4 py-2 bg-pistachio text-white rounded-lg hover:bg-pistachio-dark transition-all">
+            Register Now
+          </a>
+          <a href="student-dashboard.html" class="px-4 py-2 border-2 border-navy text-navy dark:text-white dark:border-white rounded-lg hover:bg-navy hover:text-white dark:hover:bg-white dark:hover:text-navy transition-all">
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="pt-20">
+    <!-- Page Header -->
+    <section class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">All Courses</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300">Discover our comprehensive collection of online courses</p>
+      </div>
+    </section>
+
+    <!-- Filters and Courses Section -->
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+          <!-- Sidebar Filters -->
+          <aside class="lg:w-80 flex-shrink-0">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg sticky top-24">
+              <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Filters</h2>
+              
+              <!-- Search -->
+              <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Search</label>
+                <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="Search courses..."
+                  class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-pistachio focus:border-transparent transition-all"
+                />
+              </div>
+
+              <!-- Category Filter -->
+              <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
+                <select
+                  id="categoryFilter"
+                  class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-pistachio focus:border-transparent transition-all"
+                >
+                  <option value="all">All Categories</option>
+                  <option value="web-development">Web Development</option>
+                  <option value="digital-marketing">Digital Marketing</option>
+                  <option value="graphic-design">Graphic Design</option>
+                  <option value="business">Business</option>
+                  <option value="photography">Photography</option>
+                  <option value="data-science">Data Science</option>
+                </select>
+              </div>
+
+              <!-- Rating Filter -->
+              <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Rating</label>
+                <div class="space-y-2">
+                  <label class="flex items-center cursor-pointer">
+                    <input type="checkbox" class="rating-filter w-4 h-4 text-pistachio border-gray-300 rounded focus:ring-pistachio" value="5">
+                    <div class="flex items-center gap-1 ml-2">
+                      <svg class="w-4 h-4 fill-pistachio text-pistachio" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                      <svg class="w-4 h-4 fill-pistachio text-pistachio" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                      <svg class="w-4 h-4 fill-pistachio text-pistachio" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                      <svg class="w-4 h-4 fill-pistachio text-pistachio" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                      <svg class="w-4 h-4 fill-pistachio text-pistachio" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    </div>
+                  </label>
+                  <label class="flex items-center cursor-pointer">
+                    <input type="checkbox" class="rating-filter w-4 h-4 text-pistachio border-gray-300 rounded focus:ring-pistachio" value="4">
+                    <span class="ml-2 text-gray-700 dark:text-gray-300">4+ Stars</span>
+                  </label>
+                  <label class="flex items-center cursor-pointer">
+                    <input type="checkbox" class="rating-filter w-4 h-4 text-pistachio border-gray-300 rounded focus:ring-pistachio" value="3">
+                    <span class="ml-2 text-gray-700 dark:text-gray-300">3+ Stars</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Price Filter -->
+              <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Price Range</label>
+                <div class="space-y-2">
+                  <label class="flex items-center cursor-pointer">
+                    <input type="radio" name="priceFilter" value="all" class="price-filter w-4 h-4 text-pistachio border-gray-300 focus:ring-pistachio" checked>
+                    <span class="ml-2 text-gray-700 dark:text-gray-300">All Prices</span>
+                  </label>
+                  <label class="flex items-center cursor-pointer">
+                    <input type="radio" name="priceFilter" value="0-100" class="price-filter w-4 h-4 text-pistachio border-gray-300 focus:ring-pistachio">
+                    <span class="ml-2 text-gray-700 dark:text-gray-300">$0 - $100</span>
+                  </label>
+                  <label class="flex items-center cursor-pointer">
+                    <input type="radio" name="priceFilter" value="100-200" class="price-filter w-4 h-4 text-pistachio border-gray-300 focus:ring-pistachio">
+                    <span class="ml-2 text-gray-700 dark:text-gray-300">$100 - $200</span>
+                  </label>
+                  <label class="flex items-center cursor-pointer">
+                    <input type="radio" name="priceFilter" value="200-300" class="price-filter w-4 h-4 text-pistachio border-gray-300 focus:ring-pistachio">
+                    <span class="ml-2 text-gray-700 dark:text-gray-300">$200 - $300</span>
+                  </label>
+                  <label class="flex items-center cursor-pointer">
+                    <input type="radio" name="priceFilter" value="300+" class="price-filter w-4 h-4 text-pistachio border-gray-300 focus:ring-pistachio">
+                    <span class="ml-2 text-gray-700 dark:text-gray-300">$300+</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Clear Filters Button -->
+              <button
+                id="clearFilters"
+                class="w-full py-2 px-4 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+              >
+                Clear All Filters
+              </button>
+            </div>
+          </aside>
+
+          <!-- Courses Grid -->
+          <div class="flex-1">
+            <!-- Results Count -->
+            <div class="mb-6 flex justify-between items-center">
+              <p class="text-gray-600 dark:text-gray-400">
+                Showing <span id="resultsCount">0</span> courses
+              </p>
+              <select
+                id="sortBy"
+                class="px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-pistachio focus:border-transparent transition-all"
+              >
+                <option value="default">Sort by: Default</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+                <option value="name">Name: A-Z</option>
+              </select>
+            </div>
+
+            <!-- Courses Container -->
+            <div id="coursesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <!-- Courses will be dynamically inserted here -->
+            </div>
+
+            <!-- No Results Message -->
+            <div id="noResults" class="hidden text-center py-12">
+              <svg class="w-24 h-24 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p class="text-xl text-gray-600 dark:text-gray-400">No courses found matching your filters</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-navy dark:bg-gray-950 text-white pt-16 pb-8 mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <!-- Logo and Description -->
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-pistachio to-white flex items-center justify-center">
+              <span class="font-bold text-navy text-lg">FA</span>
+            </div>
+            <span class="font-bold text-2xl">Farabi Academy</span>
+          </div>
+          <p class="text-gray-300 leading-relaxed mb-6">
+            Empowering learners worldwide with quality online education.
+          </p>
+          
+          <!-- Contact Info -->
+          <div class="space-y-2 text-gray-300">
+            <p>📧 info@farabiacademy.com</p>
+            <p>📞 +1 (555) 123-4567</p>
+            <p>📍 123 Education Street, Learning City</p>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="font-bold text-xl mb-6">Quick Links</h3>
+          <ul class="space-y-3">
+            <li>
+              <a href="index.html#about" class="text-gray-300 hover:text-pistachio transition-colors">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="courses.html" class="text-gray-300 hover:text-pistachio transition-colors">
+                Our Courses
+              </a>
+            </li>
+            <li>
+              <a href="index.html#reviews" class="text-gray-300 hover:text-pistachio transition-colors">
+                Success Stories
+              </a>
+            </li>
+            <li>
+              <a href="index.html#contact" class="text-gray-300 hover:text-pistachio transition-colors">
+                Contact Us
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Social Media -->
+        <div>
+          <h3 class="font-bold text-xl mb-6">Follow Us</h3>
+          <div class="flex gap-4">
+            <a href="#" aria-label="Facebook" class="w-12 h-12 rounded-full bg-white/10 hover:bg-pistachio flex items-center justify-center transition-all transform hover:scale-110">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="Instagram" class="w-12 h-12 rounded-full bg-white/10 hover:bg-pistachio flex items-center justify-center transition-all transform hover:scale-110">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="Twitter" class="w-12 h-12 rounded-full bg-white/10 hover:bg-pistachio flex items-center justify-center transition-all transform hover:scale-110">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 border-t border-white/10 text-center text-gray-300">
+        <p>© 2026 Farabi Academy. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="theme/assets/js/utils.js"></script>
+  <script src="theme/assets/js/app.js"></script>
+  <script src="language-switcher.js"></script>
+  
+  <script>
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const menu = document.querySelector('[data-mobile-menu]');
+      const menuIcon = document.querySelector('[data-menu-icon="menu"]');
+      const closeIcon = document.querySelector('[data-menu-icon="close"]');
+      
+      if (menu) {
+        menu.classList.toggle('hidden');
+        if (menuIcon) menuIcon.classList.toggle('hidden');
+        if (closeIcon) closeIcon.classList.toggle('hidden');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
+      if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+      }
+    });
+
+    // Courses Data
+    const courses = [
+      {
+        id: 1,
+        title: "Web Development Mastery",
+        description: "Learn HTML, CSS, JavaScript, and React from scratch to advanced level",
+        price: 299,
+        category: "web-development",
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+        students: 12500
+      },
+      {
+        id: 2,
+        title: "Digital Marketing Pro",
+        description: "Master SEO, social media marketing, and paid advertising strategies",
+        price: 249,
+        category: "digital-marketing",
+        rating: 4.7,
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+        students: 9800
+      },
+      {
+        id: 3,
+        title: "Graphic Design Fundamentals",
+        description: "Create stunning visuals with Adobe Photoshop, Illustrator, and Figma",
+        price: 199,
+        category: "graphic-design",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80",
+        students: 15200
+      },
+      {
+        id: 4,
+        title: "Business Management",
+        description: "Learn essential business skills from planning to execution",
+        price: 349,
+        category: "business",
+        rating: 4.6,
+        image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
+        students: 8700
+      },
+      {
+        id: 5,
+        title: "Photography Masterclass",
+        description: "From camera basics to professional photo editing techniques",
+        price: 279,
+        category: "photography",
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&q=80",
+        students: 11200
+      },
+      {
+        id: 6,
+        title: "Data Science & Analytics",
+        description: "Master Python, SQL, and data visualization for data-driven decisions",
+        price: 399,
+        category: "data-science",
+        rating: 5.0,
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+        students: 18900
+      },
+      {
+        id: 7,
+        title: "UI/UX Design Bootcamp",
+        description: "Complete guide to user interface and user experience design",
+        price: 329,
+        category: "graphic-design",
+        rating: 4.7,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+        students: 13400
+      },
+      {
+        id: 8,
+        title: "Content Marketing Strategy",
+        description: "Learn to create engaging content that drives results",
+        price: 229,
+        category: "digital-marketing",
+        rating: 4.5,
+        image: "https://images.unsplash.com/photo-1432888622747-4eb9a8f2d523?w=800&q=80",
+        students: 9600
+      },
+      {
+        id: 9,
+        title: "Full Stack Development",
+        description: "Build complete web applications with modern technologies",
+        price: 449,
+        category: "web-development",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+        students: 16700
+      },
+      {
+        id: 10,
+        title: "Entrepreneurship Essentials",
+        description: "Start and grow your own business from scratch",
+        price: 379,
+        category: "business",
+        rating: 4.6,
+        image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=80",
+        students: 10200
+      },
+      {
+        id: 11,
+        title: "Video Production & Editing",
+        description: "Create professional videos from shooting to post-production",
+        price: 319,
+        category: "photography",
+        rating: 4.7,
+        image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80",
+        students: 11800
+      },
+      {
+        id: 12,
+        title: "Machine Learning Basics",
+        description: "Introduction to AI and machine learning concepts",
+        price: 429,
+        category: "data-science",
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80",
+        students: 14500
+      }
+    ];
+
+    // Filter State
+    let filterState = {
+      search: '',
+      category: 'all',
+      rating: [],
+      price: 'all',
+      sortBy: 'default'
+    };
+
+    // Render Courses
+    function renderCourses(coursesToRender) {
+      const container = document.getElementById('coursesContainer');
+      const noResults = document.getElementById('noResults');
+      const resultsCount = document.getElementById('resultsCount');
+      
+      if (coursesToRender.length === 0) {
+        container.classList.add('hidden');
+        noResults.classList.remove('hidden');
+        resultsCount.textContent = '0';
+        return;
+      }
+
+      container.classList.remove('hidden');
+      noResults.classList.add('hidden');
+      resultsCount.textContent = coursesToRender.length;
+
+      container.innerHTML = coursesToRender.map(course => {
+        const stars = Math.floor(course.rating);
+        const hasHalfStar = course.rating % 1 >= 0.5;
+        let starsHTML = '';
+        
+        for (let i = 0; i < 5; i++) {
+          if (i < stars) {
+            starsHTML += '<svg class="w-4 h-4 fill-pistachio text-pistachio" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+          } else if (i === stars && hasHalfStar) {
+            starsHTML += '<svg class="w-4 h-4 fill-pistachio text-pistachio" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+          } else {
+            starsHTML += '<svg class="w-4 h-4 fill-gray-300 dark:fill-gray-600 text-gray-300" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+          }
+        }
+
+        return `
+          <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 duration-300 course-card" data-course-id="${course.id}">
+            <div class="relative h-56 overflow-hidden">
+              <img
+                src="${course.image}"
+                alt="${course.title}"
+                class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div class="absolute top-4 right-4 bg-pistachio text-white px-4 py-2 rounded-full font-bold">$${course.price}</div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-1 mb-2">
+                ${starsHTML}
+                <span class="text-sm text-gray-600 dark:text-gray-400 ml-1">(${course.rating})</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">${course.title}</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">${course.description}</p>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-sm text-gray-600 dark:text-gray-400">${course.students.toLocaleString()} students</span>
+                <span class="text-sm text-pistachio font-semibold">${course.category.replace('-', ' ')}</span>
+              </div>
+              <a href="course-details.html" class="block w-full py-3 bg-navy text-white rounded-full hover:bg-navy-dark transition-all hover:shadow-lg text-center">
+                View Details
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Filter Courses
+    function filterCourses() {
+      let filtered = [...courses];
+
+      // Search filter
+      if (filterState.search) {
+        const searchLower = filterState.search.toLowerCase();
+        filtered = filtered.filter(course =>
+          course.title.toLowerCase().includes(searchLower) ||
+          course.description.toLowerCase().includes(searchLower)
+        );
+      }
+
+      // Category filter
+      if (filterState.category !== 'all') {
+        filtered = filtered.filter(course => course.category === filterState.category);
+      }
+
+      // Rating filter
+      if (filterState.rating.length > 0) {
+        const minRating = Math.min(...filterState.rating.map(r => parseInt(r)));
+        filtered = filtered.filter(course => course.rating >= minRating);
+      }
+
+      // Price filter
+      if (filterState.price !== 'all') {
+        filtered = filtered.filter(course => {
+          const price = course.price;
+          switch (filterState.price) {
+            case '0-100':
+              return price <= 100;
+            case '100-200':
+              return price > 100 && price <= 200;
+            case '200-300':
+              return price > 200 && price <= 300;
+            case '300+':
+              return price > 300;
+            default:
+              return true;
+          }
+        });
+      }
+
+      // Sort
+      switch (filterState.sortBy) {
+        case 'price-low':
+          filtered.sort((a, b) => a.price - b.price);
+          break;
+        case 'price-high':
+          filtered.sort((a, b) => b.price - a.price);
+          break;
+        case 'rating':
+          filtered.sort((a, b) => b.rating - a.rating);
+          break;
+        case 'name':
+          filtered.sort((a, b) => a.title.localeCompare(b.title));
+          break;
+        default:
+          break;
+      }
+
+      renderCourses(filtered);
+    }
+
+    // Event Listeners
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      filterState.search = e.target.value;
+      filterCourses();
+    });
+
+    document.getElementById('categoryFilter').addEventListener('change', (e) => {
+      filterState.category = e.target.value;
+      filterCourses();
+    });
+
+    document.querySelectorAll('.rating-filter').forEach(checkbox => {
+      checkbox.addEventListener('change', (e) => {
+        if (e.target.checked) {
+          filterState.rating.push(e.target.value);
+        } else {
+          filterState.rating = filterState.rating.filter(r => r !== e.target.value);
+        }
+        filterCourses();
+      });
+    });
+
+    document.querySelectorAll('.price-filter').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        filterState.price = e.target.value;
+        filterCourses();
+      });
+    });
+
+    document.getElementById('sortBy').addEventListener('change', (e) => {
+      filterState.sortBy = e.target.value;
+      filterCourses();
+    });
+
+    document.getElementById('clearFilters').addEventListener('click', () => {
+      filterState = {
+        search: '',
+        category: 'all',
+        rating: [],
+        price: 'all',
+        sortBy: 'default'
+      };
+      
+      document.getElementById('searchInput').value = '';
+      document.getElementById('categoryFilter').value = 'all';
+      document.querySelectorAll('.rating-filter').forEach(cb => cb.checked = false);
+      document.querySelector('input[name="priceFilter"][value="all"]').checked = true;
+      document.getElementById('sortBy').value = 'default';
+      
+      filterCourses();
+    });
+
+    // Initial render
+    filterCourses();
+  </script>
+</body>
+</html>

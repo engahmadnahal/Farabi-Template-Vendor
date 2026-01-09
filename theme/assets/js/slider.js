@@ -267,6 +267,12 @@ function initSliders() {
         },
       });
       sliderContainer._sliderInstance = sliderInstance;
+      
+      // Handle RTL direction
+      sliderInstance.isRTL = document.documentElement.dir === 'rtl';
+      if (sliderInstance.isRTL) {
+        sliderInstance.wrapper.style.direction = 'rtl';
+      }
     }
   }
 
@@ -287,18 +293,6 @@ function initSliders() {
           tablet: 2,
         },
       });
-    }
-  }
-  
-  // Courses slider - also handle RTL
-  const coursesSlider = document.querySelector('[data-slider="courses"]');
-  if (coursesSlider) {
-    const sliderContainer = coursesSlider.querySelector('.slider-container');
-    if (sliderContainer && sliderContainer._sliderInstance) {
-      sliderContainer._sliderInstance.isRTL = document.documentElement.dir === 'rtl';
-      if (sliderContainer._sliderInstance.isRTL) {
-        sliderContainer._sliderInstance.wrapper.style.direction = 'rtl';
-      }
     }
   }
 }
