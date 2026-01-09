@@ -28,7 +28,7 @@
     }
   </script>
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
   <!-- Navigation -->
   <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm" id="navigation">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -94,6 +94,22 @@
         </a>
 
 
+          <!-- Dark Mode Toggle -->
+          <button
+            data-theme-toggle
+            class="flex items-center gap-2 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            aria-label="Toggle dark mode"
+          >
+            <!-- Sun Icon (Light Mode) -->
+            <svg class="w-5 h-5 text-gray-700 dark:text-gray-300 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <!-- Moon Icon (Dark Mode) -->
+            <svg class="w-5 h-5 text-gray-700 dark:text-gray-300 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
+
           <!-- Language Toggle -->
           <button
             data-language-toggle
@@ -109,6 +125,21 @@
 
         <!-- Mobile Menu Button -->
         <div class="md:hidden flex items-center gap-2">
+          <button
+            data-theme-toggle
+            class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+            aria-label="Toggle dark mode"
+          >
+            <!-- Sun Icon (Light Mode) -->
+            <svg class="w-5 h-5 text-gray-700 dark:text-gray-300 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <!-- Moon Icon (Dark Mode) -->
+            <svg class="w-5 h-5 text-gray-700 dark:text-gray-300 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
+
           <button
             data-language-toggle
             class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -974,7 +1005,7 @@
         <!-- FAQ Accordion -->
         <div data-accordion class="space-y-4">
           <!-- FAQ 1 -->
-          <div class="accordion-item">
+          <div class="accordion-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
             <button class="accordion-trigger">
               <span class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="faq.q1">
                 How do I enroll in a course?
@@ -983,7 +1014,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <div class="accordion-content">
+            <div class="accordion-content bg-white dark:bg-gray-800">
               <p class="text-gray-600 dark:text-gray-300 leading-relaxed" data-i18n="faq.a1">
                 Simply click on the 'Register Now' button, create an account, browse our course catalog, and select the course you want. You can pay securely online and get instant access.
               </p>
@@ -991,7 +1022,7 @@
           </div>
 
           <!-- FAQ 2 -->
-          <div class="accordion-item">
+          <div class="accordion-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
             <button class="accordion-trigger">
               <span class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="faq.q2">
                 Can I access courses on mobile devices?
@@ -1000,7 +1031,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <div class="accordion-content">
+            <div class="accordion-content bg-white dark:bg-gray-800">
               <p class="text-gray-600 dark:text-gray-300 leading-relaxed" data-i18n="faq.a2">
                 Yes! Our platform is fully responsive and works seamlessly on all devices including smartphones, tablets, and desktop computers.
               </p>
@@ -1008,7 +1039,7 @@
           </div>
 
           <!-- FAQ 3 -->
-          <div class="accordion-item">
+          <div class="accordion-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
             <button class="accordion-trigger">
               <span class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="faq.q3">
                 Do you offer refunds?
@@ -1017,7 +1048,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <div class="accordion-content">
+            <div class="accordion-content bg-white dark:bg-gray-800">
               <p class="text-gray-600 dark:text-gray-300 leading-relaxed" data-i18n="faq.a3">
                 We offer a 30-day money-back guarantee. If you're not satisfied with your course within the first 30 days, we'll give you a full refund, no questions asked.
               </p>
@@ -1025,7 +1056,7 @@
           </div>
 
           <!-- FAQ 4 -->
-          <div class="accordion-item">
+          <div class="accordion-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
             <button class="accordion-trigger">
               <span class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="faq.q4">
                 Are the certificates recognized?
@@ -1034,7 +1065,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <div class="accordion-content">
+            <div class="accordion-content bg-white dark:bg-gray-800">
               <p class="text-gray-600 dark:text-gray-300 leading-relaxed" data-i18n="faq.a4">
                 Yes, our certificates are recognized by many employers and institutions. They demonstrate your commitment to learning and mastery of the subject.
               </p>
@@ -1042,7 +1073,7 @@
           </div>
 
           <!-- FAQ 5 -->
-          <div class="accordion-item">
+          <div class="accordion-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
             <button class="accordion-trigger">
               <span class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="faq.q5">
                 How long do I have access to a course?
@@ -1051,7 +1082,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <div class="accordion-content">
+            <div class="accordion-content bg-white dark:bg-gray-800">
               <p class="text-gray-600 dark:text-gray-300 leading-relaxed" data-i18n="faq.a5">
                 Once you enroll in a course, you have lifetime access to all course materials, including any future updates and additions.
               </p>
@@ -1059,7 +1090,7 @@
           </div>
 
           <!-- FAQ 6 -->
-          <div class="accordion-item">
+          <div class="accordion-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
             <button class="accordion-trigger">
               <span class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="faq.q6">
                 Can I interact with instructors?
@@ -1068,7 +1099,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <div class="accordion-content">
+            <div class="accordion-content bg-white dark:bg-gray-800">
               <p class="text-gray-600 dark:text-gray-300 leading-relaxed" data-i18n="faq.a6">
                 Absolutely! You can ask questions, participate in live Q&A sessions, and get personalized feedback from our instructors throughout your learning journey.
               </p>
@@ -1244,7 +1275,7 @@
     }
 
     // Initialize mobile menu toggle
-      document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
       if (mobileMenuToggle) {
         mobileMenuToggle.addEventListener('click', toggleMobileMenu);

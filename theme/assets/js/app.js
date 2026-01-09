@@ -175,6 +175,7 @@ const App = {
     
     // Initialize components
     this.initNavigation();
+    this.initThemeToggle();
     this.initLanguageToggle();
     this.initFloatingCTA();
   },
@@ -278,11 +279,17 @@ const App = {
   },
 
   initThemeToggle() {
-    // Theme toggle removed - keeping styles only
+    document.querySelectorAll('[data-theme-toggle]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.toggleTheme();
+      });
+    });
+    this.updateThemeIcons();
   },
 
   updateThemeIcons() {
-    // Theme toggle removed - keeping styles only
+    // Icons are handled by CSS classes (dark:hidden, dark:block)
+    // No need for manual icon updates
   },
 
   initLanguageToggle() {
